@@ -4,7 +4,7 @@
 int collatz(int input);
 int main(void){
     int input = get_int("Number: ");
-    collatz(input);
+    printf("%i \n", collatz(input));
 }
 
 int collatz(int input){
