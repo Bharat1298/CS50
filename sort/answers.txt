@@ -1,11 +1,11 @@
-sort1 uses: TODO
+sort1 uses: Bubble Sort
 
-How do you know?: TODO
+How do you know?: Algorithm takes considerably more time to sort as n increases.
 
-sort2 uses: TODO
+sort2 uses: Merge Sort
 
-How do you know?: TODO
+How do you know?: The algoritim sorts in reasonable time even if n increases by a large amount
 
-sort3 uses: Selection sort
+sort3 uses: Selection Sort
 
 How do you know?: Time of sort was the same for best and worst case scenarios
