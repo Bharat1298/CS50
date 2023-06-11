@@ -8,4 +8,4 @@ How do you know?: TODO
 
 sort3 uses: Selection sort
 
-How do you know?: TODO
+How do you know?: Time of sort was the same for best and worst case scenarios
