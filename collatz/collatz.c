@@ -13,8 +13,8 @@ int collatz(int input){
         return 0;
     }
     if((input % 2) == 0){
-        return collatz(input / 2);
+        return 1 + collatz(input / 2);
     }else{
-        return collatz(3 * input + 1);
+        return 1 + collatz(3 * input + 1);
     }
 }
