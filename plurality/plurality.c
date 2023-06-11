@@ -67,12 +67,10 @@ int main(int argc, string argv[])
 // Update vote totals given a new vote
 bool vote(string name)
 {
-    for(int i = 0; i < MAX; i++){
-        if(strcasecmp(candidates[i].name, name)){
+    for(int i = 0; i <= MAX; i++){
+        if(strcmp(candidates[i].name, name)){
             candidates[i].votes++;
             return true;
-        }else{
-            printf("Invalid Vote\n");
         }
     }
     return false;
