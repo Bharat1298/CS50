@@ -6,6 +6,6 @@ sort2 uses: TODO
 
 How do you know?: TODO
 
-sort3 uses: TODO
+sort3 uses: Selection sort
 
 How do you know?: TODO
