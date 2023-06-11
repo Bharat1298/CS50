@@ -70,6 +70,8 @@ bool vote(string name)
         if(strcmp(candidates[i].name, name)){
             candidates[i].votes++;
             return true;
+        }else{
+            printf("Invalid Vote\n");
         }
     }
     return false;
