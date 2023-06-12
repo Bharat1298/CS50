@@ -121,8 +121,18 @@ void record_preferences(int ranks[])
 }
 
 // Record pairs of candidates where one is preferred over the other
+
+int pairCount = 1, recursion = candidate_count;
 void add_pairs(void)
 {
+
+    if(recursion == 0){
+        pair_count = pairCount;
+        return;
+    }
+    pairCount *= recursion;
+    recursion--;
+    add_pairs();
     return;
 }
 
