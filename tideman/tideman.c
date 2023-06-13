@@ -124,12 +124,7 @@ void record_preferences(int ranks[])
 
 void add_pairs(void)
 {
-    int pairCount = 1;
-    for(int recursion = candidate_count; recursion != 0; recursion--){
-        pairCount *= recursion;
-        return;
-    }
-    pair_count = pairCount;
+    
     return;
 }
 
