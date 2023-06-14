@@ -31,6 +31,7 @@ bool vote(int rank, string name, int ranks[]);
 void record_preferences(int ranks[]);
 void add_pairs(void);
 void sort_pairs(void);
+void mergeSort(int array[], int left, int right);
 void lock_pairs(void);
 void print_winner(void);
 
@@ -145,18 +146,14 @@ void add_pairs(void)
 void sort_pairs(void)
 {
     int merge[pair_count];
-    int left, right, mid;
+    int lower, upper;
 
-    left = 0;
-
-    right = pair_count-1;
-
-    mid = (left+right)/2;
-
-    int merge(int merge[], int left, int right){
-        
+    for (int i = 0; i < pair_count; i++){
+        printf("%i", pairs[i].winner);
+        printf("%i", pairs[i].loser);
     }
 
+    // mergeSort(merge[], lower, upper);
 
     // NEED TO SORT PAIRS ARRAY
 
@@ -175,4 +172,13 @@ void print_winner(void)
 {
     // TODO
     return;
+}
+
+void mergeSort(int array[], int left, int right){
+    if(left > right){
+        return;
+    }
+
+    int mid = 
+
 }
