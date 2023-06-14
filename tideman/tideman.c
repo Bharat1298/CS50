@@ -179,6 +179,5 @@ void mergeSort(int array[], int left, int right){
         return;
     }
 
-    int mid = 
 
 }
