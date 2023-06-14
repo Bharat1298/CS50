@@ -144,10 +144,22 @@ void add_pairs(void)
 // Sort pairs in decreasing order by strength of victory
 void sort_pairs(void)
 {
-    // NEED TO SORT PAIRS ARRAY
-    for(int i = 0; i < pair_count; i++){
+    int merge[pair_count];
+    int left, right, mid;
+
+    left = 0;
+
+    right = pair_count-1;
+
+    mid = (left+right)/2;
+
+    int merge(int merge[], int left, int right){
         
     }
+
+
+    // NEED TO SORT PAIRS ARRAY
+
     return;
 }
 
