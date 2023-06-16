@@ -157,7 +157,7 @@ void sort_pairs(void)
         tempStrength[i] = strength[i];
     }
 
-    int lower = 0;
+    int lower = 1;
 
     int upper = sizeof(strength) / sizeof(strength[0]);
 
@@ -195,35 +195,21 @@ void merge(int strength[], int lower, int mid, int upper){
         right[j] = strength[mid + 1 + j];
     }
 
-    int lInd = 0, rInd = 0, sort = 1;
-
-    while(lInd < leftArray && rInd < rightArray){
-        if(left[lInd] <= right[rInd]){
+    for(int lInd = 0, rInd = 0, sort = lower; sort <= upper; sort++){
+        if(((lInd < leftArray) && (rInd >= rightArray))
+        || left[lInd] <= right[rInd]){
             strength[sort] = left[lInd];
             lInd++;
         }else{
             strength[sort] = right[rInd];
             rInd++;
         }
-        sort++;
-    }
-
-    while(lInd < leftArray){
-        strength[sort] = left[lInd];
-        lInd++;
-        sort++;
-    }
-
-    while(rInd < rightArray){
-        strength[sort] = left[rInd];
-        rInd++;
-        sort++;
     }
 }
 
 void mergeSort(int array[], int l, int r){
     if(l < r){
-    int m = (r + l) / 2;
+    int m = l + (r - l) / 2;
 
     mergeSort(array, l, m);
     mergeSort(array, m + 1, r);
