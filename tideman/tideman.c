@@ -159,21 +159,7 @@ void sort_pairs(void)
 
     int length = sizeof(strength) / sizeof(strength[0]);
 
-    // for (int j = 0; j < pair_count; j++){
-    //     printf("VALUE: %i\n", strength[j]);
-    //     for(int k = 0; k < pair_count; k++){
-    //         printf("%i\n", tempStrength[k]);
-    //         if(tempStrength[k] == strength[j]){
-    //             tempPairs[k].winner = pairs[k].winner;
-    //             tempPairs[k].loser = pairs[k].loser;
-    //         }
-    //     }
-    // }
-
-    // for (int k = 0; k < pair_count; k++){
-    //     pairs[k].winner = tempPairs[k].winner;
-    //     pairs[k].loser = tempPairs[k].loser;
-    // }
+    
 
     return;
 }
