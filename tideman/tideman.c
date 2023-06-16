@@ -149,7 +149,9 @@ void sort_pairs(void)
     int lower, upper;
 
     for (int i = 0; i < pair_count; i++){
-        for (int j = 0; )
+        for (int j = 0; j < pair_count; j++){
+            
+        }
        merge[i] = pairs[i].winner - pairs[i].loser;
        printf("%i\n", merge[i]);
     }
