@@ -155,7 +155,12 @@ void sort_pairs(void)
 
     lower = 0;
 
-    upper = 
+    upper = sizeof(merge);
+
+    printf("%d", pair_count);
+
+
+    printf("%d", upper);
 
     int mid = (lower + upper) / 2;
     // mergeSort(merge[], lower, upper);
