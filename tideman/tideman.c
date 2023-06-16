@@ -153,8 +153,8 @@ void sort_pairs(void)
         - preferences[pairs[i].loser][pairs[i].winner];
     }
 
-    
 
+    int mid = (lower + upper) / 2;
     // mergeSort(merge[], lower, upper);
 
     // merge finds strongest order based on pairs[i]
