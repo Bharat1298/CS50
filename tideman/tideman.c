@@ -147,54 +147,37 @@ void add_pairs(void)
 void sort_pairs(void)
 {
     int strength[pair_count];
+    int tempStrength[pair_count];
+    int count;
     pair tempPairs[pair_count];
 
     for (int i = 0; i < pair_count; i++){
         strength[i] = preferences[pairs[i].winner][pairs[i].loser]
         - preferences[pairs[i].loser][pairs[i].winner];
-        printf("Strength: %d\n", strength[i]);
-        printf("%d", pairs[i].winner);
-        printf("%d\n\n", pairs[i].loser);
+        tempStrength[i] = strength[i];
     }
 
     int lower = 0;
 
     int upper = sizeof(strength) / sizeof(strength[0]);
 
-    printf("\n\n\n");
-
     mergeSort(strength, lower, upper);
 
     for (int j = 0; j < pair_count; j++){
-        printf("PRINT: %i\n", j);
-        printf("Strength: %d\n", strength[j]);
-        tempPairs[j].winner = pairs[strength[j] - 1].winner;
-        tempPairs[j].loser = pairs[strength[j] - 1].loser;
-
-        printf("Pairs: %d", pairs[strength[j] - 1].winner);
-        printf("%d", pairs[strength[j] - 1].loser);
-
-        printf("Temp: %d", tempPairs[j].winner);
-        printf("%d\n", tempPairs[j].loser);
+        printf("VALUE: %i\n", strength[j]);
+        for(int k = 0; k < pair_count; k++){
+            printf("%i\n", tempStrength[k]);
+            if(tempStrength[k] == strength[j]){
+                tempPairs[k].winner = pairs[k].winner;
+                tempPairs[k].loser = pairs[k].loser;
+            }
+        }
     }
 
     for (int k = 0; k < pair_count; k++){
         pairs[k].winner = tempPairs[k].winner;
         pairs[k].loser = tempPairs[k].loser;
-
-        printf("%d", pairs[k].winner);
-        printf("%d\n", pairs[k].loser);
     }
-
-    // mergeSort(merge[], lower, upper);
-
-    // merge finds strongest order based on pairs[i]
-
-    // NewArray[i].winner = Pairs[merge[i]].winner
-
-    // Make a new pair array
-
-    // NEED TO SORT PAIRS ARRAY
 
     return;
 }
@@ -240,7 +223,7 @@ void merge(int strength[], int lower, int mid, int upper){
 
 void mergeSort(int array[], int l, int r){
     if(l < r){
-    int m = l + (r - l) / 2;
+    int m = 1 + (r - l) / 2;
 
     mergeSort(array, l, m);
     mergeSort(array, m + 1, r);
