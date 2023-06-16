@@ -31,7 +31,8 @@ bool vote(int rank, string name, int ranks[]);
 void record_preferences(int ranks[]);
 void add_pairs(void);
 void sort_pairs(void);
-void mergeSort(int array[], int left, int right);
+void merge(int strength[], int lower, int mid, int upper);
+void mergeSort(int array[], int l, int r);
 void lock_pairs(void);
 void print_winner(void);
 
@@ -145,20 +146,36 @@ void add_pairs(void)
 // Sort pairs in decreasing order by strength of victory
 void sort_pairs(void)
 {
-    int merge[pair_count];
+    int strength[pair_count];
+    pair tempPairs[pair_count];
 
     for (int i = 0; i < pair_count; i++){
-        merge[i] = preferences[pairs[i].winner][pairs[i].loser]
+        strength[i] = preferences[pairs[i].winner][pairs[i].loser]
         - preferences[pairs[i].loser][pairs[i].winner];
+        printf("%d", pairs[i].winner);
+        printf("%d\n", pairs[i].loser);
     }
 
     int lower = 0;
 
-    int upper = sizeof(merge) / sizeof(merge[0]);
+    int upper = sizeof(strength) / sizeof(strength[0]);
 
-    int mid = (lower + upper) / 2;
+    printf("\n\n\n");
 
-    
+    mergeSort(strength, lower, upper);
+
+    for (int j = 0; j < pair_count; j++){
+        printf("PRINT: %i\n", j);
+        tempPairs[j].winner = pairs[strength[j]].winner;
+        tempPairs[j].loser = pairs[strength[j]].loser;
+
+        pairs[j].winner = tempPairs[j].winner;
+        pairs[j].loser = tempPairs[j].loser;
+
+        printf("%d", pairs[j].winner);
+        printf("%d\n", pairs[j].loser);
+    }
+
     // mergeSort(merge[], lower, upper);
 
     // merge finds strongest order based on pairs[i]
@@ -170,6 +187,46 @@ void sort_pairs(void)
     // NEED TO SORT PAIRS ARRAY
 
     return;
+}
+
+void merge(int strength[], int lower, int mid, int upper){
+    int leftArray = mid - lower + 1;
+    int rightArray = upper - mid;
+
+    int left[leftArray], right[rightArray];
+
+    for(int i = 0; i < leftArray; i++){
+        left[i] = strength[lower + i];
+    }
+    for(int j = 0; j < rightArray; j++){
+        right[j] = strength[mid + 1 + j];
+    }
+
+    int lInd = 0, rInd = 0, sort = 1;
+
+    while(lInd < leftArray && rInd < rightArray){
+        if(left[lInd] >= right[rInd]){
+            strength[sort] = left[lInd];
+            lInd++;
+        }else{
+            strength[sort] = right[rInd];
+            rInd++;
+        }
+        sort++;
+    }
+}
+
+void mergeSort(int array[], int l, int r){
+    if(l > r){
+        return;
+    }
+
+    int m = (r - l) / 2 + 1;
+
+    mergeSort(array, l, m);
+    mergeSort(array, m + 1, r);
+
+    merge(array, l, m, r);
 }
 
 // Lock pairs into the candidate graph in order, without creating cycles
@@ -184,12 +241,4 @@ void print_winner(void)
 {
     // TODO
     return;
-}
-
-void mergeSort(int array[], int left, int right){
-    if(left > right){
-        return;
-    }
-
-
 }
