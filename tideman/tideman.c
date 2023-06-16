@@ -153,7 +153,15 @@ void sort_pairs(void)
         - preferences[pairs[i].loser][pairs[i].winner];
     }
 
+    
+
     // mergeSort(merge[], lower, upper);
+
+    // merge finds strongest order based on pairs[i]
+
+    // NewArray[i].winner = Pairs[merge[i]].winner
+
+    // Make a new pair array
 
     // NEED TO SORT PAIRS ARRAY
 
