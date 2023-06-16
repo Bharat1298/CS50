@@ -32,7 +32,8 @@ void record_preferences(int ranks[]);
 void add_pairs(void);
 void sort_pairs(void);
 void merge(int strength[], int lower, int mid, int upper);
-void mergeSort(int array[], int l, int r);
+void mergeSort(int array[], int length);
+void mergeRecursion(int a[], int l, int r);
 void lock_pairs(void);
 void print_winner(void);
 
@@ -157,11 +158,9 @@ void sort_pairs(void)
         tempStrength[i] = strength[i];
     }
 
-    int lower = 1;
+    int length = sizeof(strength) / sizeof(strength[0]);
 
-    int upper = sizeof(strength) / sizeof(strength[0]);
-
-    mergeSort(strength, lower, upper);
+    mergeSort(strength, length);
 
     for (int j = 0; j < pair_count; j++){
         printf("VALUE: %i\n", strength[j]);
@@ -207,14 +206,19 @@ void merge(int strength[], int lower, int mid, int upper){
     }
 }
 
-void mergeSort(int array[], int l, int r){
+void mergeSort(int array[], int length){
+    mergeRecursion(array, 0, length - 1);
+}
+
+void mergeRecursion(int a[], int l, int r){
     if(l < r){
+
     int m = l + (r - l) / 2;
 
-    mergeSort(array, l, m);
-    mergeSort(array, m + 1, r);
+    mergeRecursion(a, l, m);
+    mergeRecursion(a, m + 1, r);
 
-    merge(array, l, m, r);
+    merge(a, l, m, r);
     }
 }
 
