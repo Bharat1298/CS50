@@ -149,7 +149,6 @@ void sort_pairs(void)
 {
     int strength[pair_count];
     int tempStrength[pair_count];
-    int count;
     pair tempPairs[pair_count];
 
     for (int i = 0; i < pair_count; i++){
@@ -160,66 +159,23 @@ void sort_pairs(void)
 
     int length = sizeof(strength) / sizeof(strength[0]);
 
-    mergeSort(strength, length);
+    // for (int j = 0; j < pair_count; j++){
+    //     printf("VALUE: %i\n", strength[j]);
+    //     for(int k = 0; k < pair_count; k++){
+    //         printf("%i\n", tempStrength[k]);
+    //         if(tempStrength[k] == strength[j]){
+    //             tempPairs[k].winner = pairs[k].winner;
+    //             tempPairs[k].loser = pairs[k].loser;
+    //         }
+    //     }
+    // }
 
-    for (int j = 0; j < pair_count; j++){
-        printf("VALUE: %i\n", strength[j]);
-        for(int k = 0; k < pair_count; k++){
-            printf("%i\n", tempStrength[k]);
-            if(tempStrength[k] == strength[j]){
-                tempPairs[k].winner = pairs[k].winner;
-                tempPairs[k].loser = pairs[k].loser;
-            }
-        }
-    }
-
-    for (int k = 0; k < pair_count; k++){
-        pairs[k].winner = tempPairs[k].winner;
-        pairs[k].loser = tempPairs[k].loser;
-    }
+    // for (int k = 0; k < pair_count; k++){
+    //     pairs[k].winner = tempPairs[k].winner;
+    //     pairs[k].loser = tempPairs[k].loser;
+    // }
 
     return;
-}
-
-void merge(int strength[], int lower, int mid, int upper){
-    int leftArray = mid - lower + 1;
-    int rightArray = upper - mid;
-
-    int left[leftArray], right[rightArray];
-
-    for(int i = 0; i < leftArray; i++){
-        left[i] = strength[lower + i];
-    }
-    for(int j = 0; j < rightArray; j++){
-        right[j] = strength[mid + 1 + j];
-    }
-
-    for(int lInd = 0, rInd = 0, sort = lower; sort <= upper; sort++){
-        if(((lInd < leftArray) && (rInd >= rightArray))
-        || left[lInd] <= right[rInd]){
-            strength[sort] = left[lInd];
-            lInd++;
-        }else{
-            strength[sort] = right[rInd];
-            rInd++;
-        }
-    }
-}
-
-void mergeSort(int array[], int length){
-    mergeRecursion(array, 0, length - 1);
-}
-
-void mergeRecursion(int a[], int l, int r){
-    if(l < r){
-
-    int m = l + (r - l) / 2;
-
-    mergeRecursion(a, l, m);
-    mergeRecursion(a, m + 1, r);
-
-    merge(a, l, m, r);
-    }
 }
 
 // Lock pairs into the candidate graph in order, without creating cycles
