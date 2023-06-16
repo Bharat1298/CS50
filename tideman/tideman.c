@@ -157,6 +157,8 @@ void sort_pairs(void)
     int upper = sizeof(merge) / sizeof(merge[0]);
 
     int mid = (lower + upper) / 2;
+
+    
     // mergeSort(merge[], lower, upper);
 
     // merge finds strongest order based on pairs[i]
