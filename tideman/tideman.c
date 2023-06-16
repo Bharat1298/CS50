@@ -168,12 +168,13 @@ void sort_pairs(void)
     for (int j = 0; j < pair_count; j++){
         printf("PRINT: %i\n", j);
         printf("Strength: %d\n", strength[j]);
-        tempPairs[j].winner = pairs[strength[j]].winner;
-        tempPairs[j].loser = pairs[strength[j]].loser;
+        tempPairs[j].winner = pairs[strength[j] - 1].winner;
+        tempPairs[j].loser = pairs[strength[j] - 1].loser;
 
+        printf("Pairs: %d", pairs[strength[j] - 1].winner);
+        printf("%d", pairs[strength[j] - 1].loser);
 
-
-        printf("%d", tempPairs[j].winner);
+        printf("Temp: %d", tempPairs[j].winner);
         printf("%d\n", tempPairs[j].loser);
     }
 
