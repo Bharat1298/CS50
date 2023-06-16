@@ -155,7 +155,7 @@ void sort_pairs(void)
             }else{
                 merge[i] = 0;
             }
-            printf("%i\n", merge[i]);
+            printf("%i\n", preferences[i][j]);
         }
     }
 
