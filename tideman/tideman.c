@@ -215,7 +215,7 @@ void merge(int strength[], int lower, int mid, int upper){
     int lInd = 0, rInd = 0, sort = 1;
 
     while(lInd < leftArray && rInd < rightArray){
-        if(left[lInd] >= right[rInd]){
+        if(left[lInd] <= right[rInd]){
             strength[sort] = left[lInd];
             lInd++;
         }else{
