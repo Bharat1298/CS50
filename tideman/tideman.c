@@ -152,8 +152,9 @@ void sort_pairs(void)
     for (int i = 0; i < pair_count; i++){
         strength[i] = preferences[pairs[i].winner][pairs[i].loser]
         - preferences[pairs[i].loser][pairs[i].winner];
+        printf("Strength: %d\n", strength[i]);
         printf("%d", pairs[i].winner);
-        printf("%d\n", pairs[i].loser);
+        printf("%d\n\n", pairs[i].loser);
     }
 
     int lower = 0;
@@ -166,14 +167,22 @@ void sort_pairs(void)
 
     for (int j = 0; j < pair_count; j++){
         printf("PRINT: %i\n", j);
+        printf("Strength: %d\n", strength[j]);
         tempPairs[j].winner = pairs[strength[j]].winner;
         tempPairs[j].loser = pairs[strength[j]].loser;
 
-        pairs[j].winner = tempPairs[j].winner;
-        pairs[j].loser = tempPairs[j].loser;
 
-        printf("%d", pairs[j].winner);
-        printf("%d\n", pairs[j].loser);
+
+        printf("%d", tempPairs[j].winner);
+        printf("%d\n", tempPairs[j].loser);
+    }
+
+    for (int k = 0; k < pair_count; k++){
+        pairs[k].winner = tempPairs[k].winner;
+        pairs[k].loser = tempPairs[k].loser;
+
+        printf("%d", pairs[k].winner);
+        printf("%d\n", pairs[k].loser);
     }
 
     // mergeSort(merge[], lower, upper);
@@ -214,19 +223,29 @@ void merge(int strength[], int lower, int mid, int upper){
         }
         sort++;
     }
+
+    while(lInd < leftArray){
+        strength[sort] = left[lInd];
+        lInd++;
+        sort++;
+    }
+
+    while(rInd < rightArray){
+        strength[sort] = left[rInd];
+        rInd++;
+        sort++;
+    }
 }
 
 void mergeSort(int array[], int l, int r){
-    if(l > r){
-        return;
-    }
-
-    int m = (r - l) / 2 + 1;
+    if(l < r){
+    int m = l + (r - l) / 2;
 
     mergeSort(array, l, m);
     mergeSort(array, m + 1, r);
 
     merge(array, l, m, r);
+    }
 }
 
 // Lock pairs into the candidate graph in order, without creating cycles
