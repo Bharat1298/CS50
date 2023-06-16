@@ -150,10 +150,13 @@ void sort_pairs(void)
 
     for (int i = 0; i < pair_count; i++){
         for (int j = 0; j < pair_count; j++){
-            merge[i] = preferences[]
+            if((preferences[i][j] - preferences[j][i]) > 0){
+                merge[i] = preferences[i][j] - preferences[j][i];
+            }else{
+                merge[i] = 0;
+            }
+            printf("%i\n", merge[i]);
         }
-       merge[i] = pairs[i].winner - pairs[i].loser;
-       printf("%i\n", merge[i]);
     }
 
     // mergeSort(merge[], lower, upper);
