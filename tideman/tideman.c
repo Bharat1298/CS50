@@ -146,21 +146,15 @@ void add_pairs(void)
 void sort_pairs(void)
 {
     int merge[pair_count];
-    int lower, upper;
 
     for (int i = 0; i < pair_count; i++){
         merge[i] = preferences[pairs[i].winner][pairs[i].loser]
         - preferences[pairs[i].loser][pairs[i].winner];
     }
 
-    lower = 0;
+    int lower = 0;
 
-    upper = sizeof(merge);
-
-    printf("%d", pair_count);
-
-
-    printf("%d", upper);
+    int upper = sizeof(merge) / sizeof(merge[0]);
 
     int mid = (lower + upper) / 2;
     // mergeSort(merge[], lower, upper);
