@@ -223,7 +223,7 @@ void merge(int strength[], int lower, int mid, int upper){
 
 void mergeSort(int array[], int l, int r){
     if(l < r){
-    int m = 1 + (r - l) / 2;
+    int m = (r + l) / 2;
 
     mergeSort(array, l, m);
     mergeSort(array, m + 1, r);
