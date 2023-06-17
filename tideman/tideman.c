@@ -31,7 +31,7 @@ bool vote(int rank, string name, int ranks[]);
 void record_preferences(int ranks[]);
 void add_pairs(void);
 void sort_pairs(void);
-void merge_sort(int i, int j, pair pair_example[], pair temp[]);
+void merge_sort(int i, int j, pair array[], pair temp[]);
 void lock_pairs(void);
 void print_winner(void);
 
@@ -150,7 +150,7 @@ void sort_pairs(void)
     return;
 }
 
-void merge_sort(int i, int j, pair pair_example[], pair temp[])
+void merge_sort(int i, int j, pair array[], pair temp[])
 {
     // i = the first index of array, j = the last index of array
     if (j <= i)
@@ -163,35 +163,35 @@ void merge_sort(int i, int j, pair pair_example[], pair temp[])
     int lLength = i;
     int rLength = mid + 1;
     for (int k = i; k < j + 1; k++){
-        int left_winner = pair_example[lLength].winner;
-        int left_loser = pair_example[lLength].loser;
-        int right_winner = pair_example[rLength].winner;
-        int right_loser = pair_example[rLength].loser;
+        int left_winner = array[lLength].winner;
+        int left_loser = array[lLength].loser;
+        int right_winner = array[rLength].winner;
+        int right_loser = array[rLength].loser;
         if (lLength > mid) // left array reaches its end
         {
-            temp[k] = pair_example[rLength];
+            temp[k] = array[rLength];
             rLength++;
         }
         else if (rLength > j) // right array reaches its end
         {
-            temp[k] = pair_example[lLength];
+            temp[k] = array[lLength];
             lLength++;
         }
         else if (preferences[left_winner][left_loser] > preferences[right_winner][right_loser])
         {
-            temp[k] = pair_example[lLength];
+            temp[k] = array[lLength];
             lLength++;
         }
         else
         {
-            temp[k] = pair_example[rLength];
+            temp[k] = array[rLength];
             rLength++;
         }
     }
     for (int k = i; k < j + 1; k++)
     {
         // copy sorted array into original pair
-        pair_example[k] = temp[k];
+        array[k] = temp[k];
     }
 }
 
