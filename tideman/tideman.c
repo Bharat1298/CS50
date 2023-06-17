@@ -160,6 +160,11 @@ void merge_sort(int i, int j, pair array[], pair temp[])
     int mid = (i + j) / 2;
     merge_sort(i, mid, pairs, temp);
     merge_sort(mid + 1, j, pairs, temp);
+
+    for(int p = 0; p < pair_count; p++){
+        printf("Array: %d%d\n Temp: %d%d\n", array[i].winner, array[i].loser, temp[i].winner, temp[i].loser);
+    }
+
     int lLength = i;
     int rLength = mid + 1;
     for (int k = i; k < j + 1; k++){
