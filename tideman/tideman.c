@@ -33,6 +33,7 @@ void add_pairs(void);
 void sort_pairs(void);
 void merge_sort(int i, int j, pair array[], pair temp[]);
 void lock_pairs(void);
+bool lock(bool arr[]);
 void print_winner(void);
 
 int main(int argc, string argv[])
@@ -198,6 +199,11 @@ void lock_pairs(void)
 {
     // TODO
     return;
+}
+
+bool lock(bool arr[]){
+    
+    return false;
 }
 
 // Print the winner of the election
