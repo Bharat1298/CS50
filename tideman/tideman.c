@@ -159,9 +159,43 @@ void sort_pairs(void)
 
     int length = sizeof(strength) / sizeof(strength[0]);
 
-    
-
     return;
+}
+
+void merge(int a[], int length){
+    mergeRecursion(a, 0, length - 1);
+}
+
+void mergeRecursion(int a[], int l, int r){
+    if(l < r){
+        int m = l + (r - l) /2;
+
+        mergeRecursion(a, l, m);
+        mergeRecursion(a, m + 1, r);
+
+        mergeSort(a, l, m, r);
+    }
+}
+
+void mergeSort(int a[], int l, int m, int r){
+    int lLength = m - l + 1;
+    int rLength = r - m;
+
+    int tempLeft[lLength];
+    int tempRight[rLength];
+
+    int i, j, k;
+
+    for(int i = 0; i <lLength; i++){
+        tempLeft[i] = a[l + i];
+    }
+    for(int i = 0; i <rLength; i++){
+        tempRight[i] = a[m + 1 + i];
+    }
+
+    for(i = 0, j = 0, k = l; k <= r; k++){
+        if((i < leftLength) && (j <= rightLength))
+    }
 }
 
 // Lock pairs into the candidate graph in order, without creating cycles
