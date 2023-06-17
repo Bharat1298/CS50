@@ -167,12 +167,12 @@ void merge_sort(int i, int j, pair pair_example[], pair temp[])
         int left_loser = pair_example[lLength].loser;
         int right_winner = pair_example[rLength].winner;
         int right_loser = pair_example[rLength].loser;
-        if (lLength == mid + 1) // left array reaches its end
+        if (lLength > mid) // left array reaches its end
         {
             temp[k] = pair_example[rLength];
             rLength++;
         }
-        else if (rLength == j + 1) // right array reaches its end
+        else if (rLength > j) // right array reaches its end
         {
             temp[k] = pair_example[lLength];
             lLength++;
