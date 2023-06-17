@@ -161,12 +161,19 @@ void sort_pairs(void)
 
     merge(strength, length);
 
+    int v;
+
     for(int i = 0; i < pair_count; i++){
         for(int j = 0; j < pair_count; j++){
             if(tempStrength[i] == strength[j]){
-                temppairs[j] = pairs[]
+                v = i;
+                if(tempStrength[i] == strength[j - 1]){
+                    v = i + 1;
+                }
             }
         }
+        tempPairs[i] = pairs[v];
+        pairs[i] = tempPairs[i];
     }
 
     return;
