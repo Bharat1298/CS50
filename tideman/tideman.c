@@ -202,19 +202,18 @@ void lock_pairs(void)
 }
 
 bool lock(){
-    bool arr[MAX][MAX] = locked[MAX][MAX];
-    if(!lock(arr)){
+    if(!lock(locked)){
         for(int i = 0; i < pair_count; i++){
             for(int j = 0; j < pair_count; j++){
                 if(pairs[i].winner == pairs[j].loser){
                     return false;
                 }
-                arr[i][j] = true;
+                locked[i][j] = true;
                 return true;
             }
         }
     }
-    return false;
+    return true;
 }
 
 // Print the winner of the election
