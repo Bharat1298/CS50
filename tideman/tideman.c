@@ -33,7 +33,7 @@ void add_pairs(void);
 void sort_pairs(void);
 void merge_sort(int i, int j, pair array[], pair temp[]);
 void lock_pairs(void);
-bool lock(bool arr[][]);
+bool lock();
 void print_winner(void);
 
 int main(int argc, string argv[])
@@ -201,7 +201,8 @@ void lock_pairs(void)
     return;
 }
 
-bool lock(bool arr[][]){
+bool lock(){
+    bool arr[MAX][MAX] = locked[MAX][MAX];
     if(!lock(arr)){
         for(int i = 0; i < pair_count; i++){
             for(int j = 0; j < pair_count; j++){
