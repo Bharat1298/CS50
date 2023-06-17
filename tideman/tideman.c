@@ -33,7 +33,7 @@ void add_pairs(void);
 void sort_pairs(void);
 void merge_sort(int i, int j, pair array[], pair temp[]);
 void lock_pairs(void);
-bool lock();
+bool lock(int loser);
 void print_winner(void);
 
 int main(int argc, string argv[])
@@ -197,21 +197,19 @@ void merge_sort(int i, int j, pair array[], pair temp[])
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
-    // TODO
+    for(int i = 0; i < pair_count; i++){
+        if(!lock(pairs[i].loser)){
+            locked[pairs[i].winner][pairs[i].loser] = true;
+        }
+    }
     return;
 }
 
-bool lock(){
-    if(!(lock())){
-        for(int i = 0; i < pair_count; i++){
-            for(int j = 0; j < pair_count; j++){
-                if(pairs[i].winner == pairs[j].loser){
-                    return true;
-                }
-                locked[i][j] = true;
-            }
+bool lock(int loser){
+    for (int i = 0; i < pair_count; i++){
+        if(loser == pairs[i].winner){
+            return false;
         }
-        return true;
     }
     return true;
 }
