@@ -194,7 +194,13 @@ void mergeSort(int a[], int l, int m, int r){
     }
 
     for(i = 0, j = 0, k = l; k <= r; k++){
-        if((i < leftLength) && (j <= rightLength))
+        if((i < lLength) && (j >= rLength) || tempLeft[i] <= tempRight[j]){
+            a[k] = tempLeft;
+            i++;
+        }else{
+            a[k] = tempRight[j];
+            j++;
+        }
     }
 }
 
