@@ -202,16 +202,16 @@ void lock_pairs(void)
 }
 
 bool lock(){
-    if(!lock(locked)){
+    if(!(lock())){
         for(int i = 0; i < pair_count; i++){
             for(int j = 0; j < pair_count; j++){
                 if(pairs[i].winner == pairs[j].loser){
-                    return false;
+                    return true;
                 }
                 locked[i][j] = true;
-                return true;
             }
         }
+        return true;
     }
     return true;
 }
