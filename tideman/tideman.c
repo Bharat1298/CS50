@@ -31,9 +31,9 @@ bool vote(int rank, string name, int ranks[]);
 void record_preferences(int ranks[]);
 void add_pairs(void);
 void sort_pairs(void);
-void merge(int strength[], int lower, int mid, int upper);
-void mergeSort(int array[], int length);
+void merge(int a[], int length);
 void mergeRecursion(int a[], int l, int r);
+void mergeSort(int a[], int l, int m, int r);
 void lock_pairs(void);
 void print_winner(void);
 
@@ -159,6 +159,14 @@ void sort_pairs(void)
 
     int length = sizeof(strength) / sizeof(strength[0]);
 
+    merge(strength, length);
+
+    for(int i = 0; i < pair_count; i++){
+        for(int j = 0; j < pair_count; j++){
+            
+        }
+    }
+
     return;
 }
 
@@ -186,20 +194,20 @@ void mergeSort(int a[], int l, int m, int r){
 
     int i, j, k;
 
-    for(int i = 0; i <lLength; i++){
-        tempLeft[i] = a[l + i];
+    for(int x = 0; x <lLength; x++){
+        tempLeft[x] = a[l + x];
     }
-    for(int i = 0; i <rLength; i++){
-        tempRight[i] = a[m + 1 + i];
+    for(int y = 0; y <rLength; y++){
+        tempRight[y] = a[m + 1 + y];
     }
 
     for(i = 0, j = 0, k = l; k <= r; k++){
-        if((i < lLength) && (j >= rLength) || tempLeft[i] <= tempRight[j]){
-            a[k] = tempLeft;
-            i++;
-        }else{
+        if((i < lLength) && (j >= rLength || tempLeft[i] <= tempRight[j])){
             a[k] = tempRight[j];
             j++;
+        }else{
+            a[k] = tempLeft[i];
+            i++;
         }
     }
 }
