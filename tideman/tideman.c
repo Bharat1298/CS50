@@ -31,9 +31,7 @@ bool vote(int rank, string name, int ranks[]);
 void record_preferences(int ranks[]);
 void add_pairs(void);
 void sort_pairs(void);
-void merge(int a[], int length);
-void mergeRecursion(int a[], int l, int r);
-void mergeSort(int a[], int l, int m, int r);
+void merge_sort(int i, int j, pair pair_example[], pair temp[]);
 void lock_pairs(void);
 void print_winner(void);
 
@@ -147,77 +145,53 @@ void add_pairs(void)
 // Sort pairs in decreasing order by strength of victory
 void sort_pairs(void)
 {
-    int strength[pair_count];
-    int tempStrength[pair_count];
-    pair tempPairs[pair_count];
-
-    for (int i = 0; i < pair_count; i++){
-        strength[i] = preferences[pairs[i].winner][pairs[i].loser]
-        - preferences[pairs[i].loser][pairs[i].winner];
-        tempStrength[i] = strength[i];
-    }
-
-    int length = sizeof(strength) / sizeof(strength[0]);
-
-    merge(strength, length);
-
-    int v;
-
-    for(int i = 0; i < pair_count; i++){
-        for(int j = 0; j < pair_count; j++){
-            if(tempStrength[i] == strength[j]){
-                v = i;
-                if(tempStrength[i] == strength[j - 1]){
-                    v = i + 1;
-                }
-            }
-        }
-        tempPairs[i] = pairs[v];
-        pairs[i] = tempPairs[i];
-    }
-
+    pair temp[pair_count];
+    merge_sort(0, pair_count - 1, pairs, temp);
     return;
 }
 
-void merge(int a[], int length){
-    mergeRecursion(a, 0, length - 1);
-}
-
-void mergeRecursion(int a[], int l, int r){
-    if(l < r){
-        int m = l + (r - l) /2;
-
-        mergeRecursion(a, l, m);
-        mergeRecursion(a, m + 1, r);
-
-        mergeSort(a, l, m, r);
+void merge_sort(int i, int j, pair pair_example[], pair temp[])
+{
+    // i = the first index of array, j = the last index of array
+    if (j <= i)
+    {
+        return;
     }
-}
-
-void mergeSort(int a[], int l, int m, int r){
-    int lLength = m - l + 1;
-    int rLength = r - m;
-
-    int tempLeft[lLength];
-    int tempRight[rLength];
-
-    int i, j, k;
-
-    for(int x = 0; x <lLength; x++){
-        tempLeft[x] = a[l + x];
-    }
-    for(int y = 0; y <rLength; y++){
-        tempRight[y] = a[m + 1 + y];
-    }
-
-    for(i = 0, j = 0, k = l; k <= r; k++){
-        if((i < lLength) && (j >= rLength || tempLeft[i] <= tempRight[j])){
-            a[k] = tempRight[j];
-            j++;
-        }else{
-            a[k] = tempLeft[i];
-            i++;
+    int mid = (i + j) / 2;
+    merge_sort(i, mid, pairs, temp);
+    merge_sort(mid + 1, j, pairs, temp);
+    int lLength = i;
+    int rLength = mid + 1;
+    for (int k = i; k < j + 1; k++){
+        int left_winner = pair_example[lLength].winner;
+        int left_loser = pair_example[lLength].loser;
+        int right_winner = pair_example[rLength].winner;
+        int right_loser = pair_example[rLength].loser;
+        if (lLength == mid + 1) // left array reaches its end
+        {
+            temp[k] = pair_example[rLength];
+            rLength++;
         }
+        else if (rLength == j + 1) // right array reaches its end
+        {
+            temp[k] = pair_example[lLength];
+            lLength++;
+        }
+        else if (preferences[left_winner][left_loser] > preferences[right_winner][right_loser])
+        {
+            temp[k] = pair_example[lLength];
+            lLength++;
+        }
+        else
+        {
+            temp[k] = pair_example[rLength];
+            rLength++;
+        }
+    }
+    for (int k = i; k < j + 1; k++)
+    {
+        // copy sorted array into original pair
+        pair_example[k] = temp[k];
     }
 }
 
