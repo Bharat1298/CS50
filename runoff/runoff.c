@@ -154,27 +154,54 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // TODO
+    for(int i = 0; i < candidate_count; i++){
+        if(candidates[i].votes > voter_count / 2){
+            printf("%s\n", candidates[i].name);
+            return true;
+        }
+    }
     return false;
 }
 
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    // TODO
-    return 0;
+    int min = voter_count;
+    for(int i = 0; i < candidate_count; i++){
+        if(!candidates[i].eliminated){
+            if(candidates[i].votes < min){
+                min = candidates[i].votes;
+            }
+        }
+    }
+    return min;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    // TODO
-    return false;
+    bool tie = false;
+    for(int i = 0; i < candidate_count; i++){
+        if(!candidates[i].eliminated){
+            if(candidates[i].votes == min){
+                tie = true;
+            }else{
+                tie = false;
+            }
+        }
+    }
+    return tie;
 }
 
 // Eliminate the candidate (or candidates) in last place
 void eliminate(int min)
 {
-    // TODO
+    for(int i = 0; i < candidate_count; i++){
+        if(!candidates[i].eliminated){
+            if(candidates[i].votes == min){
+                candidates[i].eliminated = true;
+            }
+        }
+    }
     return;
 }
