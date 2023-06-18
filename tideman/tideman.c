@@ -33,7 +33,7 @@ void add_pairs(void);
 void sort_pairs(void);
 void merge_sort(int i, int j, pair array[], pair temp[]);
 void lock_pairs(void);
-bool lock(int loser);
+bool lock(int winner, int loser);
 void print_winner(void);
 
 int main(int argc, string argv[])
@@ -153,7 +153,6 @@ void sort_pairs(void)
 
 void merge_sort(int i, int j, pair array[], pair temp[])
 {
-    // i = the first index of array, j = the last index of array
     if (j <= i)
     {
         return;
@@ -173,10 +172,10 @@ void merge_sort(int i, int j, pair array[], pair temp[])
         int left_loser = array[lLength].loser;
         int right_winner = array[rLength].winner;
         int right_loser = array[rLength].loser;
-        if (lLength > mid){ // left array reaches its end
+        if (lLength > mid){
             temp[k] = array[rLength];
             rLength++;
-        }else if(rLength > j){ // right array reaches its end
+        }else if(rLength > j){
             temp[k] = array[lLength];
             lLength++;
         }else if(preferences[left_winner][left_loser]
@@ -189,7 +188,6 @@ void merge_sort(int i, int j, pair array[], pair temp[])
         }
     }
     for (int k = i; k < j + 1; k++){
-        // copy sorted array into original pair
         array[k] = temp[k];
     }
 }
@@ -198,25 +196,43 @@ void merge_sort(int i, int j, pair array[], pair temp[])
 void lock_pairs(void)
 {
     for(int i = 0; i < pair_count; i++){
-        if(!lock(pairs[i].loser)){
+        if(!lock(pairs[i].winner, pairs[i].loser)){
             locked[pairs[i].winner][pairs[i].loser] = true;
         }
     }
     return;
 }
 
-bool lock(int loser){
-    for (int i = 0; i < pair_count; i++){
-        if(loser == pairs[i].winner){
-            return false;
+bool lock(int winner, int loser){
+    if(locked[loser][winner] == true){
+        return true;
+    }
+
+    for(int i = 0; i < candidate_count; i++){
+        if(locked[loser][i] && lock(winner, i)){
+            return true;
         }
     }
-    return true;
+    return false;
 }
 
 // Print the winner of the election
 void print_winner(void)
 {
-    // TODO
+    int i;
+    for(i = 0; i < candidate_count; i++){
+        int count = 1;
+        for(int j = 0; j < candidate_count; j++){
+            if(locked[j][i] == true){
+                count = 0;
+            }
+        }
+        if(count == 1){
+            break;
+        }
+    }
+
+    printf("%s\n", candidates[i]);
+
     return;
 }
