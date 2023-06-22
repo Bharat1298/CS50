@@ -33,7 +33,12 @@ int main(int argc, char *argv[])
 
     float factor = atof(argv[3]);
 
-    malloc(HEADER_SIZE);
+    char copy;
+
+    for(int i = 0; i < HEADER_SIZE; i++){
+        copy = fgetc(input);
+        fputc(copy, output);
+    }
 
     // TODO: Copy header from input file to output file
 
