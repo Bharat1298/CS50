@@ -35,12 +35,9 @@ int main(int argc, char *argv[])
 
     char copy;
 
-    for(int i = 0; i < HEADER_SIZE; i++){
-        copy = fgetc(input);
-        fputc(copy, output);
-    }
+    uint8_t header[HEADER_SIZE];
 
-    
+
 
     // TODO: Copy header from input file to output file
 
