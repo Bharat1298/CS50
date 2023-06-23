@@ -34,13 +34,15 @@ int main(int argc, char *argv[])
     float factor = atof(argv[3]);
 
     uint8_t header[HEADER_SIZE];
-
-    fread(header, HEADER_SIZE, 1, input);
-
-    fwrite(header, HEADER_SIZE, 1, output);
+    int16_t buffer;
 
     for(int i = 0; i < HEADER_SIZE; i++){
-        printf()
+        fread(&header[i], sizeof(int), 1, input);
+        fwrite(&header[i], sizeof(int), 1, output);
+    }
+
+    while(fread(&buffer, sizeof(int), 1, input)){
+        fwrite(&buffer * factor, sizeof(int), 1, output);
     }
 
 
