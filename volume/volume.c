@@ -41,15 +41,10 @@ int main(int argc, char *argv[])
         fwrite(&header[i], sizeof(int), 1, output);
     }
 
-    while(fgetc(input) != EOF){
-        buffer = fgetc(input);
-        fputc(buffer * factor, output);
+    while(fread(&buffer, sizeof(int16_t), 1, input)){
+        buffer *= factor;
+        fwrite(&buffer, sizeof(int16_t), 1, output);
     }
-
-
-    // TODO: Copy header from input file to output file
-
-    // TODO: Read samples from input file and write updated data to output file
 
     // Close files
     fclose(input);
