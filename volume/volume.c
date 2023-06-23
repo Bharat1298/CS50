@@ -41,8 +41,9 @@ int main(int argc, char *argv[])
         fwrite(&header[i], sizeof(int), 1, output);
     }
 
-    while(fread(&buffer, sizeof(int), 1, input)){
-        fwrite(&buffer * factor, sizeof(int), 1, output);
+    while(fgetc(input) != EOF){
+        buffer = fgetc(input);
+        fputc(buffer * factor, output);
     }
 
 
