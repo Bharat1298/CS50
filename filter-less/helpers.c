@@ -20,8 +20,8 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
     BYTE originalRed;
     BYTE originalGreen;
     BYTE originalBlue;
-    for(int i = 0; i < height; i++){
-        for(int j = 0; j < width; j++){
+    for(int i = 0; i < width; i++){
+        for(int j = 0; j < height; j++){
             originalRed = image[i][j].rgbtRed;
             originalGreen = image[i][j].rgbtGreen;
             originalBlue = image[i][j].rgbtBlue;
