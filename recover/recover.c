@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
     typedef uint8_t BYTE;
-    int BLOCK_SIZE = 512 * BYTE;
+    BYTE BLOCK_SIZE;
     if(argc != 2){
         printf("Usage: ./recover IMAGE");
         return 1;
