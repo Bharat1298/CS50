@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     }
 
     FILE *input = fopen(argv[1], "r");
+    FILE *output = NULL;
 
     if(input == NULL){
         free(filename);
@@ -27,7 +28,7 @@ int main(int argc, char *argv[])
         if(Buffer[0] == 0xff && Buffer[1] == 0xd8 && Buffer[2] == 0xff
            && ((Buffer[3] & 0xf0) == 0xe0)){
               sprintf(filename, "%03i.jpg", counter);
-              FILE *output = fopen(filename, "W");
+              output = fopen(filename, "W");
               if(counter == 0){
                   fwrite(Buffer, BLOCK_SIZE, 1, output);
                   counter++;
