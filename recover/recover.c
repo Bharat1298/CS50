@@ -33,9 +33,10 @@ int main(int argc, char *argv[])
             }
         if(output != NULL){
               fwrite(Buffer, BLOCK_SIZE, 1, output);
+              fclose(output);
         }
     }
-    
+
     free(filename);
     fclose(output);
     fclose(input);
