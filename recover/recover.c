@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
     BYTE Buffer[BLOCK_SIZE];
     int counter = 0;
-    char* filename = malloc(8);
+    char* filename = malloc(8 * sizeof(char));
     if(argc != 2){
         printf("Usage: ./recover IMAGE");
         free(filename);
