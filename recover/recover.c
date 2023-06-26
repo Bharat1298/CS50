@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
     BYTE Buffer[BLOCK_SIZE];
     int counter = 0;
-    char* filename;
+    char* filename = malloc(8);
     if(argc != 2){
         printf("Usage: ./recover IMAGE");
         return 1;
@@ -28,8 +28,11 @@ int main(int argc, char *argv[])
                 FILE *output = fopen(filename, "W");
                 counter++;
 
-                fwrite(Buffer, BLOCK_SIZE, 1, filename);
+                fwrite(Buffer, BLOCK_SIZE, 1, output);
            }
     }
+
+    free(filename);
+    fclose(input);
 
 }
