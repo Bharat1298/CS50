@@ -10,21 +10,17 @@ int main(int argc, char *argv[])
     BYTE Buffer[BLOCK_SIZE];
     int counter = 0;
     char* filename = malloc(8 * sizeof(char));
-    char* oldFile = malloc(8 * sizeof(char));
     if(argc != 2){
         printf("Usage: ./recover IMAGE");
         free(filename);
-        free(oldFile);
         return 1;
     }
 
     FILE *input = fopen(argv[1], "r");
     FILE *output = NULL;
-    FILE *oldFile = NULL;
 
     if(input == NULL){
         free(filename);
-        free(oldFile);
         return 1;
     }
 
@@ -36,20 +32,13 @@ int main(int argc, char *argv[])
               counter++;
             }
         if(output != NULL){
-            if(!counter){
-                fwrite(Buffer, BLOCK_SIZE, 1, output);
-            }else{
-                sprintf(oldFile, "%03i.jpg", counter - 1);
-                oldFile = 
-                fclose(oldFile);
-                fwrite(Buffer, BLOCK_SIZE, 1, output);
-            }
+              fwrite(Buffer, BLOCK_SIZE, 1, output);
         }
     }
-
-    fclose(output);
+    
     free(filename);
-    free(oldFile);
+    fclose(output);
     fclose(input);
 
+    return 0;
 }
