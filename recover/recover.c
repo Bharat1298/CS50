@@ -24,11 +24,13 @@ int main(int argc, char *argv[])
     while(fread(Buffer, BLOCK_SIZE, 1, input)){
         if(Buffer[0] == 0xff && Buffer[1] == 0xd8 && Buffer[2] == 0xff
            && ((Buffer[3] & 0xf0) == 0xe0)){
+            // if()
                 sprintf(filename, "%03i.jpg", counter);
                 FILE *output = fopen(filename, "W");
                 counter++;
 
                 fwrite(Buffer, BLOCK_SIZE, 1, output);
+                fclose(output);
            }
     }
 
