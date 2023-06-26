@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+typedef uint8_t BYTE;
+int BLOCK_SIZE = 512;
+
 int main(int argc, char *argv[])
 {
-    typedef uint8_t BYTE;
     BYTE Buffer[512];
-    int BLOCK_SIZE = 512;
     if(argc != 2){
         printf("Usage: ./recover IMAGE");
         return 1;
@@ -19,7 +20,8 @@ int main(int argc, char *argv[])
     }
 
     while(fread(Buffer, BLOCK_SIZE, 1, input)){
-        fwrite(Buffer, BLOCK_SIZE, 1, output)
+        if(Buffer[0] == 0xff && Buffer[1] == 0xd8 && Buffer[2] == 0xff
+           && (Buffer[3] & 0xe == 0xe0))
     }
 
 }
