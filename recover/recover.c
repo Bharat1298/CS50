@@ -12,10 +12,9 @@ int main(int argc, char *argv[])
     char* filename = malloc(8);
     if(argc != 2){
         printf("Usage: ./recover IMAGE");
+        free(filename);
         return 1;
     }
-
-    free(filename);
 
     FILE *input = fopen(argv[1], "r");
 
