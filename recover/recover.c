@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     FILE *input = fopen(argv[1], "r");
 
     if(input == NULL){
+        free(filename);
         return 1;
     }
 
