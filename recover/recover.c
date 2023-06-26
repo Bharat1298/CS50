@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
 {
     BYTE Buffer[BLOCK_SIZE];
     int counter = 0;
+    char* filename;
     if(argc != 2){
         printf("Usage: ./recover IMAGE");
         return 1;
@@ -23,8 +24,11 @@ int main(int argc, char *argv[])
     while(fread(Buffer, BLOCK_SIZE, 1, input)){
         if(Buffer[0] == 0xff && Buffer[1] == 0xd8 && Buffer[2] == 0xff
            && ((Buffer[3] & 0xf0) == 0xe0)){
-                FILE
+                sprintf(filename, "%03i.jpg", counter);
+                FILE *output = fopen(filename, "W");
                 counter++;
+
+                fwrite(Buffer, BLOCK_SIZE, 1, filename);
            }
     }
 
