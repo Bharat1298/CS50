@@ -24,21 +24,23 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    while(fread(Buffer, sizeof(char), BLOCK_SIZE, input)){
+    while(fread(Buffer, sizeof(BYTE) * BLOCK_SIZE, 1, input)){
         if(Buffer[0] == 0xff && Buffer[1] == 0xd8 && Buffer[2] == 0xff
            && ((Buffer[3] & 0xf0) == 0xe0)){
+            if(output != NULL){
+                fclose(output);
+            }
               sprintf(filename, "%03i.jpg", counter);
               output = fopen(filename, "w");
               counter++;
             }
         if(output != NULL){
-              fwrite(Buffer, BLOCK_SIZE, 1, output);
-              fclose(output);
+              fwrite(Buffer, sizeof(BYTE) * BLOCK_SIZE, 1, output);
         }
     }
 
-    free(filename);
     fclose(output);
+    free(filename);
     fclose(input);
 
     return 0;
