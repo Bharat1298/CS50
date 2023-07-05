@@ -9,11 +9,18 @@ int get_block_size(WAVHEADER header);
 
 int main(int argc, char *argv[])
 {
-    // Ensure proper usage
-    // TODO #1
+    if(argc != 3){
+        printf("Usage: ./reverse input.wav output.wav");
+        return 1;
+    }
 
-    // Open input file for reading
-    // TODO #2
+    FILE *input = fopen(argv[1], "r");
+
+    if(input == NULL){
+        fclose(input);
+        printf("Input is not a WAV file.");
+        return 1;
+    }
 
     // Read header
     // TODO #3
