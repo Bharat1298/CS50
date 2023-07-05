@@ -7,6 +7,8 @@
 int check_format(WAVHEADER header);
 int get_block_size(WAVHEADER header);
 
+int headerSize = 44;
+
 int main(int argc, char *argv[])
 {
     if(argc != 3){
@@ -22,8 +24,11 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // Read header
-    // TODO #3
+    WAVHEADER *head = NULL;
+
+    while(fread(head, sizeof(BYTE) * headerSize, 1, input)){
+        
+    }
 
     // Use check_format to ensure WAV format
     // TODO #4
