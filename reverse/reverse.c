@@ -26,12 +26,9 @@ int main(int argc, char *argv[])
 
     WAVHEADER *head = NULL;
 
-    while(fread(head, sizeof(BYTE) * headerSize, 1, input)){
-        
-    }
+    fread(head, sizeof(BYTE) * headerSize, 1, input);
 
-    // Use check_format to ensure WAV format
-    // TODO #4
+    check_format(head);
 
     // Open output file for writing
     // TODO #5
@@ -48,7 +45,7 @@ int main(int argc, char *argv[])
 
 int check_format(WAVHEADER header)
 {
-    // TODO #4
+    if(header[8] == 'W' && header[9] == 'A')
     return 0;
 }
 
