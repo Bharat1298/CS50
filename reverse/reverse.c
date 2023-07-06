@@ -7,50 +7,65 @@
 int check_format(WAVHEADER header);
 int get_block_size(WAVHEADER header);
 
-int headerSize = 44;
-
 int main(int argc, char *argv[])
 {
     if(argc != 3){
-        printf("Usage: ./reverse input.wav output.wav");
+        printf("Usage: ./reverse input.wav output.wav\n");
         return 1;
     }
 
     FILE *input = fopen(argv[1], "r");
 
     if(input == NULL){
+        printf("Input is not a WAV file\n");
         fclose(input);
-        printf("Input is not a WAV file.");
         return 1;
     }
 
-    WAVHEADER *head = NULL;
+    WAVHEADER head;
 
-    fread(head, sizeof(BYTE) * headerSize, 1, input);
+    fread(&head, sizeof(WAVHEADER), 1, input);
 
-    check_format(head);
+    if(!check_format(head)){
+        printf("Invalid format\n");
+        return 1;
+    }
 
-    // Open output file for writing
-    // TODO #5
+    FILE *output = fopen(argv[2], "w");
 
-    // Write header to file
-    // TODO #6
+    if(output == NULL){
+        printf("Output file is invalid\n");
+        fclose(input);
+        fclose(output);
+        return 1;
+    }
 
-    // Use get_block_size to calculate size of block
-    // TODO #7
+    fwrite(&head, sizeof(WAVHEADER), 1, output);
 
-    // Write reversed audio to file
-    // TODO #8
+    printf("%li\n", ftell(output));
+
+    int blockSize = get_block_size(head);
+
+    while(ftell(input) > sizeof(WAVHEADER)){
+        fseek
+    }
+
+    fclose(input);
+    fclose(output);
 }
 
 int check_format(WAVHEADER header)
 {
-    if(header[8] == 'W' && header[9] == 'A')
-    return 0;
+    if(header.format[0] == 'W' && header.format[1] == 'A' &&
+       header.format[2] == 'V' && header.format[3] == 'E'){
+        return 1;
+    }else{
+        return 0;
+    }
 }
 
 int get_block_size(WAVHEADER header)
 {
-    // TODO #7
-    return 0;
+    int blockSize = header.bitsPerSample / sizeof(BYTE);
+    return blockSize * header.numChannels;
 }
