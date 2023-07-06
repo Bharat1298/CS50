@@ -42,16 +42,22 @@ int main(int argc, char *argv[])
 
     fwrite(&head, sizeof(WAVHEADER), 1, output);
 
-    printf("%li\n", ftell(output));
-
     int blockSize = get_block_size(head);
 
-    while(ftell(input) > sizeof(WAVHEADER)){
-        fseek
+    BYTE buffer[blockSize];
+
+    int size = head.subchunk2Size / blockSize;
+
+    for(int i = 1; i <= size; i++){
+        fseek(input, -blockSize * i, SEEK_END);
+        fread(buffer, blockSize, 1, input);
+        fwrite(buffer, blockSize, 1, output);
     }
 
     fclose(input);
     fclose(output);
+
+    return 0;
 }
 
 int check_format(WAVHEADER header)
@@ -66,6 +72,5 @@ int check_format(WAVHEADER header)
 
 int get_block_size(WAVHEADER header)
 {
-    int blockSize = header.bitsPerSample / sizeof(BYTE);
-    return blockSize * header.numChannels;
+    return (header.bitsPerSample / 8) * header.numChannels;
 }
