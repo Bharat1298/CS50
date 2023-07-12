@@ -63,15 +63,15 @@ bool load(const char *dictionary)
 
         words -> next = NULL;
 
-        if(table[hashed] == NULL)
-        {
-            table[hashed] = words;
-        }
-        else
-        {
+        // if(table[hashed] == NULL)
+        // {
+        //     table[hashed] = words;
+        // }
+        // else
+        // {
             words -> next = table[hashed];
             table[hashed] = words;
-        }
+        //}
     }
 
     fclose(input);
