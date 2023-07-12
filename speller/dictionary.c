@@ -61,9 +61,17 @@ bool load(const char *dictionary)
 
         int hashed = hash(words -> word);
 
-        words -> next = table[hashed];
+        words -> next = NULL;
 
-        table[hashed] = words;
+        if(table[hashed] = NULL)
+        {
+            table[hashed] = words;
+        }
+        else
+        {
+            words -> next = table[hashed];
+            table[hashed] = words;
+        }
     }
 
     return true;
