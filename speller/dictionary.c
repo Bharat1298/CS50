@@ -3,6 +3,8 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #include "dictionary.h"
 
@@ -39,6 +41,28 @@ bool load(const char *dictionary)
 {
     FILE *input = fopen(dictionary, "r");
 
+    if(input == NULL)
+    {
+        return false;
+    }
+
+    char word[LENGTH + 1];
+
+    while(fscanf(input, "%s", word) != EOF)
+    {
+        node *words = malloc(sizeof(node));
+
+        if(words == NULL)
+        {
+            return false;
+        }
+
+        strcpy(words -> word, word);
+
+        hash(words);
+
+        
+    }
 
 
     return false;
