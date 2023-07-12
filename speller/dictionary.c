@@ -61,7 +61,7 @@ bool load(const char *dictionary)
 
         hash(words);
 
-        
+
     }
 
 
