@@ -17,10 +17,13 @@ typedef struct node
 node;
 
 // TODO: Choose number of buckets in hash table
-const unsigned int N = 26;
+const unsigned int N = LENGTH;
 
 // Hash table
 node *table[N];
+
+// Word Count
+int wordCount = 0;
 
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
@@ -32,8 +35,13 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    // TODO: Improve this hash function
-    return toupper(word[0]) - 'A';
+    unsigned int hash = 0;
+
+    for (int i = 0; word[i] != '\0'; i++)
+    {
+        hash =
+    }
+    return sizeof(*word) / sizeof(word[0]) % N;
 }
 
 // Loads dictionary into memory, returning true if successful, else false
@@ -63,15 +71,17 @@ bool load(const char *dictionary)
 
         words -> next = NULL;
 
-        // if(table[hashed] == NULL)
-        // {
-        //     table[hashed] = words;
-        // }
-        // else
-        // {
+        if(table[hashed] == NULL)
+        {
+            table[hashed] = words;
+        }
+        else
+        {
             words -> next = table[hashed];
             table[hashed] = words;
-        //}
+        }
+
+        wordCount++;
     }
 
     fclose(input);
@@ -81,8 +91,14 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    if(load)
+    {
+        return wordCount;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
