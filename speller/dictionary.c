@@ -59,10 +59,12 @@ bool load(const char *dictionary)
 
         strcpy(words -> word, word);
 
-        table[hash(words)] = words;
+        int hashed = hash(words -> word);
 
+        words -> next = table[hashed];
+
+        table[hashed] = words;
     }
-
 
     return false;
 }
