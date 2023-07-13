@@ -20,7 +20,7 @@ node;
 const unsigned int N = LENGTH;
 
 // Hash table
-node *table[N];
+node *table[N][26];
 
 // Word Count
 int wordCount = 0;
@@ -35,14 +35,14 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    unsigned int hash = 0;
-
-    for (int i = 0; word[i] != '\0'; i++)
-    {
-        hash =
-    }
     return sizeof(*word) / sizeof(word[0]) % N;
 }
+
+unsigned int hashLetter(const char *word)
+{
+    return toupper(word) - 'A';
+}
+
 
 // Loads dictionary into memory, returning true if successful, else false
 bool load(const char *dictionary)
@@ -68,17 +68,18 @@ bool load(const char *dictionary)
         strcpy(words -> word, word);
 
         int hashed = hash(words -> word);
+        int letter = hashLetter(words -> word);
 
         words -> next = NULL;
 
-        if(table[hashed] == NULL)
+        if(table[hashed][letter] == NULL)
         {
-            table[hashed] = words;
+            table[hashed][letter] = words;
         }
         else
         {
-            words -> next = table[hashed];
-            table[hashed] = words;
+            words -> next = table[hashed][letter];
+            table[hashed][letter] = words;
         }
 
         wordCount++;
@@ -91,7 +92,7 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
 unsigned int size(void)
 {
-    if(load)
+    if(&load)
     {
         return wordCount;
     }
