@@ -122,5 +122,7 @@ bool unload(void)
             }
         }
     }
+
+    free(temp);
     return true;
 }
