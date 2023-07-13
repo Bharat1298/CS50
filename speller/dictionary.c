@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <strings.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -20,7 +21,7 @@ node;
 const unsigned int N = LENGTH;
 
 // Hash table
-node *table[N][26];
+node *table[N];
 
 // Word Count
 int wordCount = 0;
@@ -28,19 +29,36 @@ int wordCount = 0;
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
-    // TODO
-    return false;
+    int length = hash(word);
+    int letter = hashLetter(word);
+
+    bool check = false;
+
+    node *arrow = table[length];
+
+    while(arrow != NULL)
+    {
+        if(strcasecmp(word, arrow -> word) == 0){
+            check = true;
+            return true;
+        }
+
+        arrow = arrow -> next;
+
+    }
+
+    return check;
 }
 
 // Hashes word to a number
-unsigned int hash(const char *word)
+unsigned int hashLetter(const char *word)
 {
     return sizeof(*word) / sizeof(word[0]) % N;
 }
 
-unsigned int hashLetter(const char *word)
+unsigned int hash(const char *word)
 {
-    return toupper(word) - 'A';
+    return 0 ;//toupper(word[0]) - 'A';
 }
 
 
@@ -70,17 +88,8 @@ bool load(const char *dictionary)
         int hashed = hash(words -> word);
         int letter = hashLetter(words -> word);
 
-        words -> next = NULL;
-
-        if(table[hashed][letter] == NULL)
-        {
-            table[hashed][letter] = words;
-        }
-        else
-        {
-            words -> next = table[hashed][letter];
-            table[hashed][letter] = words;
-        }
+        words -> next = table[hashed];
+        table[hashed] = words;
 
         wordCount++;
     }
@@ -92,14 +101,7 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
 unsigned int size(void)
 {
-    if(&load)
-    {
-        return wordCount;
-    }
-    else
-    {
-        return 0;
-    }
+    return wordCount;
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
