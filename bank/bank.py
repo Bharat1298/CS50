@@ -1,4 +1,6 @@
 input = input()
 
-if input.strip(0:1) = 'h' or H
-    
+input.capitalize()
+
+if input.startswith('H'):
+    print("$20")
