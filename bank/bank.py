@@ -1,6 +1,8 @@
-input = input("Greeting: " end )
+input = input("Greeting: ").strip()
 
-input.capitalize()
+input.toUpper()
+
+print(input)
 
 if input.startswith('H'):
     print("$20")
