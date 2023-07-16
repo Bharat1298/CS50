@@ -1,4 +1,4 @@
-input = input()
+input = input("Greeting: " end )
 
 input.capitalize()
 
