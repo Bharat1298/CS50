@@ -1,8 +1,9 @@
 input = input("Greeting: ").strip()
 
-input.toUpper()
+word = input.lower()
 
-print(input)
+if word 
 
-if input.startswith('H'):
+if word.startswith('h'):
     print("$20")
+
