@@ -29,6 +29,7 @@ def main():
     print(f"\nSeven-Day Averages")
 
     # Print out 7-day averages for this week vs last week
+    print("averages: ")
     comparative_averages(new_cases, states)
 
 
