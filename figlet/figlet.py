@@ -4,18 +4,19 @@ from pyfiglet import Figlet
 
 figlet = Figlet()
 
-try:
-    if len(sys.argv) > 2 and (sys.argv[1] == '-f' or '--font') and (sys.argv[2] in figlet.getFonts()):
-        f = Figlet(font = sys.argv[2])
+argv = ["-f", "--font"]
 
-        input = input("Input: ")
+if len(sys.argv) > 2 and (sys.argv[1] in argv) and (sys.argv[2] in figlet.getFonts()):
+    f = Figlet(font = sys.argv[2])
 
-        print (f.renderText(input))
-    elif len(sys.argv) < 2:
-        f = Figlet(font = random.choice(figlet.getFonts()))
+    input = input("Input: ")
 
-        input = input("Input: ")
+    print (f.renderText(input))
+elif len(sys.argv) < 2:
+    f = Figlet(font = random.choice(figlet.getFonts()))
 
-        print (f.renderText(input))
-except:
-    sys.exit(1)
+    input = input("Input: ")
+
+    print (f.renderText(input))
+else:
+    sys.exit("Invalid usage")
