@@ -9,15 +9,15 @@ def main():
     for rows in range(size):
 
         for space in range(rowsLeft - 1):
-            print(" ")
+            print(" ", end = "")
 
         for left in range(rows):
-            print("#", end: "")
+            print("#", end = "")
 
-        print("  ")
+        print("  ", end = "")
 
         for right in range(rows):
-            print("#")
+            print("#", end = "")
 
         rowsLeft -= 1
         print("")
