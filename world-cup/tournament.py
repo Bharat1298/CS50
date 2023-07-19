@@ -23,6 +23,7 @@ def main():
         country = team['team']
         rating = team['rating']
         teams[team] = team[country, int(rating)]
+        
 
     counts = {}
     # TODO: Simulate N tournaments and keep track of win counts
