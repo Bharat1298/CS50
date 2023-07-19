@@ -1,16 +1,19 @@
+from cs50 import get_int
+
+
 def main():
     size = 0
 
     while size < 1 or size > 8:
-        size = int(input("How big is the pyramid? "))
+        size = get_int("How big is the pyramid? ")
 
     rowsLeft = size
 
     rows = 1
 
-    for rows in range(size+1):
+    for rows in range(1, size + 1):
 
-        for space in range(rowsLeft):
+        for space in range(rowsLeft - 1):
             print(" ", end = "")
 
         for left in range(rows):
