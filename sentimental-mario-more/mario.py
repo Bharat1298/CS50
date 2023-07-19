@@ -8,9 +8,9 @@ def main():
 
     rows = 1
 
-    for rows in range(size):
+    for rows in range(size+1):
 
-        for space in range(rowsLeft - 1):
+        for space in range(rowsLeft):
             print(" ", end = "")
 
         for left in range(rows):
