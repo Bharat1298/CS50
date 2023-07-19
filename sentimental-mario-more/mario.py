@@ -6,6 +6,8 @@ def main():
 
     rowsLeft = size
 
+    rows = 1
+
     for rows in range(size):
 
         for space in range(rowsLeft - 1):
