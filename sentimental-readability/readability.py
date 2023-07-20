@@ -24,7 +24,9 @@ def main():
 
 
 def letters(text):
-    return text.ascii_letters()
+    for letter in text:
+        if letter.isalpha():
+            count += 1
 
 def words(text):
 
