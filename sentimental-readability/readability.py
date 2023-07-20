@@ -24,13 +24,25 @@ def main():
 
 
 def letters(text):
+    count = 0
     for letter in text:
         if letter.isalpha():
             count += 1
+    return count
 
 def words(text):
+    count = 1
+    for char in text:
+        if char == ' ':
+            count += 1
+    return count
 
 def sentences(text):
+    count = 0
+    for word in text:
+        if word == '.' or word == '!' or word == '?':
+            count += 1
+    return count
 
 if __name__ == "__main__":
     main()
