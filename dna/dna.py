@@ -45,6 +45,7 @@ def main():
 
     if match in allValues:
         suspect = "hello"
+        print(allValues[match])
 
     print(suspect)
 
