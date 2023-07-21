@@ -36,7 +36,7 @@ def main():
 
     for person in dna:
         for i in range(len(check)):
-            print(person[f'{check[i]}'])
+            print(match[i])
             if person[f'{check[i]}'] == match[i]:
                 print(person[f'{check[i]}'])
                 true = True
