@@ -27,21 +27,20 @@ def main():
     for str in check:
         match.append(longest_match(sequence, str))
 
-    print(dna)
-
-    print(match)
-
     suspect = ""
 
     true = False
 
+    print(check)
+    print(match)
+
     for person in dna:
         for i in range(len(check)):
+            print(person[f'{check[i]}'])
             if person[f'{check[i]}'] == match[i]:
                 print(person[f'{check[i]}'])
                 true = True
             else:
-                print("kys")
                 true = False
         if(true):
             suspect = person['name']
