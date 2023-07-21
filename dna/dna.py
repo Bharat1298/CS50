@@ -27,11 +27,7 @@ def main():
     for str in check:
         match.append(longest_match(sequence, str))
 
-    suspect = ""
-
-    true = False
-
-    #print(match)
+    suspect = "No match"
 
     allValues = []
 
@@ -44,12 +40,11 @@ def main():
         allValues.append(value)
 
     if match in allValues:
-        suspect = "hello"
-        print(match.index())
+        suspect = dna[allValues.index(match)]['name']
 
     print(suspect)
 
-    return suspect
+    return
 
 
 def longest_match(sequence, subsequence):
