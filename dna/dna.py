@@ -4,61 +4,55 @@ import sys
 
 def main():
 
-    # TODO: Check for command-line usage
-
     if len(sys.argv) != 3:
         print("Incorrect usage")
         return 1
 
-    # TODO: Read database file into a variable
-
-    dnaData = []
-    dnaCheck = []
+    dna = []
 
     with open(sys.argv[1], 'r') as file:
-        check = csv.reader(file)
-        count = 0
+        dnaReader = csv.DictReader(file)
+        for data in dnaReader:
+            dna.append(data)
 
-        for str in check:
-            if count == 0:
-                for char in str:
-                    if char != 'name':
-                        dnaCheck.append(char)
-                break
-            break
-
-    with open(sys.argv[1], 'r') as file:
-        reader = csv.DictReader(file)
-        for data in reader:
-            dnaData.append(data)
-
-    # TODO: Read DNA sequence file into a variable
-
-    sequenceData = []
+    sequence = []
 
     with open(sys.argv[2]) as file:
-        database = csv.reader(file)
-        for i in database:
-            for j in i:
-                sequenceData.append(j)
+        sequence = file.read()
 
-    # TODO: Find longest match of each STR in DNA sequence
+    check = list(dna[0].keys())[1:]
 
-    for str in dnaCheck:
-        longest_match(sequenceData, str)
+    match = []
 
-    print(dnaData)
-    print(dnaCheck)
-    print(sequenceData)
+    for str in check:
+        match.append(longest_match(sequence, str))
 
-    # for sequence in dnaData:
-    #     if sequence in sequenceData:
-    #         longest_match(sequenceData, sequence)
+    print(dna)
 
+    print(match)
 
-    # TODO: Check database for matching profiles
+    suspect = ""
 
-    return
+    true = False
+
+    for person in dna:
+        for i in range(len(check)):
+            if person[f'{check[i]}'] == match[i]:
+                print(person[f'{check[i]}'])
+                true = True
+            else:
+                print("kys")
+                true = False
+        if(true):
+            suspect = person['name']
+            print(suspect)
+            break
+        else:
+            suspect = "No match"
+
+    print(suspect)
+
+    return suspect
 
 
 def longest_match(sequence, subsequence):
