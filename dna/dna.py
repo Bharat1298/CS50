@@ -32,7 +32,11 @@ def main():
     true = False
 
     for person in dna:
+        
         for i in range(len(check)):
+            value = []
+
+
             print(person[f'{check[i]}'])
             if person[f'{check[i]}'] == match[i]:
                 print(person[f'{check[i]}'])
