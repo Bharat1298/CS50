@@ -13,8 +13,21 @@ def main():
     # TODO: Read database file into a variable
 
     dnaData = []
+    dnaCheck = []
 
-    with open(sys.argv[1]) as file:
+    with open(sys.argv[1], 'r') as file:
+        check = csv.reader(file)
+        count = 0
+
+        for str in check:
+            if count == 0:
+                for char in str:
+                    if char != 'name':
+                        dnaCheck.append(char)
+                break
+            break
+
+    with open(sys.argv[1], 'r') as file:
         reader = csv.DictReader(file)
         for data in reader:
             dnaData.append(data)
@@ -25,12 +38,23 @@ def main():
 
     with open(sys.argv[2]) as file:
         database = csv.reader(file)
-        for sequence in database:
-            sequenceData.append(sequence)
+        for i in database:
+            for j in i:
+                sequenceData.append(j)
 
     # TODO: Find longest match of each STR in DNA sequence
 
-    
+    for str in dnaCheck:
+        longest_match(sequenceData, str)
+
+    print(dnaData)
+    print(dnaCheck)
+    print(sequenceData)
+
+    # for sequence in dnaData:
+    #     if sequence in sequenceData:
+    #         longest_match(sequenceData, sequence)
+
 
     # TODO: Check database for matching profiles
 
