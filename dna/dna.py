@@ -31,24 +31,20 @@ def main():
 
     true = False
 
+    #print(match)
+
+    allValues = []
+
     for person in dna:
-        
-        for i in range(len(check)):
-            value = []
+        value = []
+        counter = 0
+        for seq in check:
+            value.append(int(person[f'{seq}']))
+            counter += 1
+        allValues.append(value)
 
-
-            print(person[f'{check[i]}'])
-            if person[f'{check[i]}'] == match[i]:
-                print(person[f'{check[i]}'])
-                true = True
-            else:
-                true = False
-        if(true):
-            suspect = person['name']
-            print(suspect)
-            break
-        else:
-            suspect = "No match"
+    if match in allValues:
+        suspect = "hello"
 
     print(suspect)
 
