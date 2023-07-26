@@ -1,1 +1,7 @@
-SELECT (AVG(energy) + AVG(valence) + AVG(danceability)) / 3 AS Auido_Aura FROM songs;
+1: SELECT (AVG(energy) + AVG(valence) + AVG(danceability)) / 3 AS Auido_Aura FROM songs;
+
+2: The method I calculated might not be very representative of the listener because
+   it looks at the top 100 songs that they've listened to equally. The listener might've
+   listened to their top 10 songs 100 times more than they listened to their bottom 90.
+   A better way to calculate the aura would be to see how many times they listened to each song and
+   weigh it accordingly.
