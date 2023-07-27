@@ -30,9 +30,9 @@ AND passport_number in (SELECT passport_number FROM passengers WHERE flight_id I
 Select name FROM people WHERE phone_number IN
 (SELECT caller FROM phone_calls WHERE year = 2021 AND day = 28 AND month = 7 AND duration < 60)
 AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN
-(SELECT id FROM flights WHERE year = 2021 AND day = 29 AND month = 7 ORDER BY hour LIMIT 1))
+(SELECT id FROM flights WHERE year = 2021 AND day = 29 AND month = 7 AND destination_airport_id = 4 ORDER BY hour DESC LIMIT 1))
 AND license_plate IN (SELECT license_plate FROM bakery_security_logs WHERE year = 2021 AND day = 28 AND month = 7 AND activity = 'exit')
 AND id IN(SELECT person_id FROM bank_accounts WHERE account_number in
 (SELECT account_number FROM atm_transactions WHERE year = 2021 AND day = 28 AND month = 7 AND transaction_type = 'withdraw' and atm_location = 'Leggett Street'));
 
-SELECT activity FROM bakery_security_logs WHERE year = 2021 AND day = 28 AND month = 7;
+SELECT activity FROM bakery_security_logs WHERE year = 2021 AND day = 28 AND month = 7;`
