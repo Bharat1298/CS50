@@ -1,0 +1,15 @@
+.center{
+    text-align: center;
+}
+
+#header{
+    background-color: cyan;
+    border: 5px solid;
+
+}
+
+#navbar{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
