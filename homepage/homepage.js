@@ -1,4 +1,6 @@
+document.getElementById('home').onClick = tabs();
+
 function tabs(){
-    var home = document.getElementById("home");
-    home.classList.add("active");
+    var home = document.getElementById("header");
+    home.classList.toggle("active");
 }
