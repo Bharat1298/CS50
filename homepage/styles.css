@@ -38,29 +38,38 @@ nav img{
 }
 
 .nav-links ul li a{
-    color: cyan;
+    color: #ECBFF9;
     text-decoration: none;
     font-size: 16px;
 }
 
 .nav-links ul li::after{
     content: '';
-    width: 100%;
+    width: 0%;
     height: 2px;
-    background: snow;
+    background: #62FFFD;
     display: block;
     margin: auto;
+}
+
+.nav-links ul li:hover::after{
+    width: 100%;
+    transition: 0.3s;
 }
 
 .center{
     text-align: center;
 }
 
-/* #header{
-    background-color: cyan;
-    border: 5px solid;
-
-} */
+.text-box{
+    width: 90%;
+    color: #fff;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
 
 #navbar{
     list-style-type: none;
