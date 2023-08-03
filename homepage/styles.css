@@ -1,12 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    min-height: 100vh;
+    width: 100%;
+    background-image: url(https://c4.wallpaperflare.com/wallpaper/103/794/554/one-piece-monkey-d-luffy-portgas-d-ace-sea-wallpaper-preview.jpg) ,
+    linear-gradient(blue, violet);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+}
+
 .center{
     text-align: center;
 }
 
-#header{
+/* #header{
     background-color: cyan;
     border: 5px solid;
 
-}
+} */
 
 #navbar{
     list-style-type: none;
