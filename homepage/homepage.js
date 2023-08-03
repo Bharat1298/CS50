@@ -1,6 +1,10 @@
-document.getElementById('home').onClick = tabs();
+document.getElementById('contact').addEventListener("mouseenter", enter('contact'));
+document.getElementById('contact').addEventListener("mouseleave", exit('contact'));
 
-function tabs(){
-    var home = document.getElementById("header");
-    home.classList.toggle("active");
+function enter(button){
+    document.getElementById(button).classList.add("active");
+}
+
+function exit(button){
+    document.getElementById(button).classList.remove("active");
 }
