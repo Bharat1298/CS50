@@ -108,6 +108,10 @@ nav img{
         display: block;
     }
 
+    .nav-links ul li a{
+        color: #3A49B3;
+    }
+
     .nav-links{
         position: absolute;
         background: #ECBFF9;
