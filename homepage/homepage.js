@@ -1,10 +1,10 @@
-// document.getElementById('contact').addEventListener("mouseenter", enter('contact'));
-// document.getElementById('contact').addEventListener("mouseleave", exit('contact'));
+document.getElementById('open-button').addEventListener("click", showMenu);
+document.getElementById('close-button').addEventListener("click", hideMenu);
 
-// function enter(button){
-//     document.getElementById(button).classList.add("active");
-// }
+function showMenu(){
+    document.getElementById("nav-links").style.right = "0px";
+}
 
-// function exit(button){
-//     document.getElementById(button).classList.remove("active");
-// }
+function hideMenu(button){
+    document.getElementById("nav-links").style.right = "-200px";
+}
