@@ -9,7 +9,7 @@
     min-height: 100vh;
     width: 100%;
     background-image: url(https://images3.alphacoders.com/132/1323165.png) ,
-    linear-gradient(#3A49B3, #23008A);
+    linear-gradient(#23008A, #3A49B3);
     background-position: center;
     background-size: cover;
     position: relative;
@@ -150,8 +150,8 @@ nav .fa{
 
 /* Timeline */
 
-.journey-color{
-    /* background-color: #23008A; */
+.color-shift{
+    background-color: linear-gradient(to bottom, #23008A, #3A49B3);
 }
 
 .timeline{
