@@ -95,7 +95,13 @@ nav img{
 
 .button:hover{
     background: #ECBFF9;
-    color: #62FFFD;
+    color: #3A49B3;
     transition: 0.5s;
+}
+
+@media(max-width: 700px){
+    .text-box h1{
+        font-size: 31px;
+    }
 }
 
