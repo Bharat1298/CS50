@@ -150,12 +150,15 @@ nav .fa{
 
 /* Timeline */
 
+.journey-color{
+    background-color: #23008A;
+}
+
 .timeline{
-    width: 100%;
+    width: 80%;
     margin: auto;
     text-align: center;
     padding-top: 25px;
-    background-color: #23008A;
 }
 
 .timeline h3{
