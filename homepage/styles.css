@@ -110,18 +110,21 @@ nav .fa{
 }
 
 /* About Page */
+
+.about-intro{
+    text-align: center;
+}
+
 .thumbnails{
     list-style: none;
     padding: 8px 12px;
-    position: relative;
 }
 
 .captain{
     border: 1px solid #ddd;
-    height: 500;
+    height: 300px;
     width: 250px;
     align-items: center;
-    display: inline;
 }
 
 .captain img{
