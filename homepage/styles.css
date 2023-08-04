@@ -104,6 +104,8 @@ nav .fa{
     display: none;
 }
 
+/* Small Devices */
+
 @media(max-width: 700px){
     .text-box h1{
         font-size: 31px;
@@ -140,6 +142,10 @@ nav .fa{
     .nav-links ul{
         padding: 10px;
     }
+
+    .journey{
+        flex-direction: column;
+    }
 }
 
 /* Timeline */
@@ -152,16 +158,42 @@ nav .fa{
     background-color: #23008A;
 }
 
-h1{
-    font-size: 26px;
+.timeline h3{
+    text-align: center;
     font-weight: 600;
+    margin: 10px 0;
+    color: #ECBFF9;
 }
 
-p{
-    color: #fff;
+.timeline h1{
+    font-size: 26px;
+    font-weight: 600;
+    color: #ECBFF9;
+}
+
+.timeline p{
     font-size: 14px;
     font-weight: 300;
     line-height: 22px;
-    padding: 10px;
+    padding: 0px;
 }
 
+.journey{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.saga{
+    flex-basis: 30%;
+    border-radius: 40px;
+    background: #3A49B3;
+    margin-bottom: 5%;
+    padding: 0 5px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+.saga:hover{
+    box-shadow: 0 0 20px 0px rgba(0,0,0,1);
+}
