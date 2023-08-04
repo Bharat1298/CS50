@@ -151,7 +151,7 @@ nav .fa{
 /* Timeline */
 
 .color-shift{
-    background-color: linear-gradient(to bottom, #23008A, #3A49B3);
+    background-image: linear-gradient(to bottom, #23008A, #ECBFF9);
 }
 
 .timeline{
