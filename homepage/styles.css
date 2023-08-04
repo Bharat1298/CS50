@@ -200,3 +200,10 @@ nav .fa{
 .saga:hover{
     box-shadow: 0 0 20px 0px rgba(0,0,0,1);
 }
+
+.crew{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+}
