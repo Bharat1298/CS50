@@ -104,6 +104,11 @@ nav .fa{
     display: none;
 }
 
+/* Empty Pages */
+.blank{
+    background-image: linear-gradient(to bottom, #23008A, #ECBFF9);
+}
+
 /* Small Devices */
 
 @media(max-width: 700px){
