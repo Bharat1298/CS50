@@ -93,3 +93,9 @@ nav img{
     cursor: pointer;
 }
 
+.button:hover{
+    background: #ECBFF9;
+    color: #62FFFD;
+    transition: 0.5s;
+}
+
