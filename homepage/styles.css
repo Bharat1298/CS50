@@ -123,7 +123,7 @@ nav .fa{
 .captain{
     border: 5px solid #ddd;
     height: auto;
-    width: 30rem;
+    width: 350px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -136,8 +136,10 @@ nav .fa{
 
 .crew{
     border: 1px solid #ddd;
-    height: 100;
-    width: 250px;
+    height: 100px;
+    width: 150px;
+    display: flex;
+    flex-direction: row;
 }
 
 .crew img{
