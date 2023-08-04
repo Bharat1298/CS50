@@ -8,7 +8,7 @@
 .header{
     min-height: 100vh;
     width: 100%;
-    background-image: url(https://images3.alphacoders.com/132/1323165.png) ,
+    background-image: url(https://images3.alphacoders.com/132/1323165.png),
     linear-gradient(to bottom, #B465FB, #3E00FE);
     background-position: center;
     background-size: cover;
@@ -108,6 +108,40 @@ nav .fa{
 .blank{
     background-image: linear-gradient(to bottom, #23008A, #ECBFF9);
 }
+
+/* About Page */
+.thumbnails{
+    list-style: none;
+    padding: 8px 12px;
+    position: relative;
+}
+
+.captain{
+    border: 1px solid #ddd;
+    height: 500;
+    width: 250px;
+    align-items: center;
+    display: inline;
+}
+
+.captain img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.crew{
+    border: 1px solid #ddd;
+    height: 100;
+    width: 250px;
+}
+
+.crew img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
 
 /* Small Devices */
 
