@@ -137,9 +137,8 @@ nav .fa{
 .crew{
     border: 1px solid #ddd;
     height: auto;
-    width: 1500px;
-    display: flex;
-    flex-direction: row;
+    width: 250px;
+
 }
 
 .crew img{
