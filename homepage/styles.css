@@ -118,6 +118,7 @@ nav .fa{
 .thumbnails{
     list-style: none;
     padding: 8px 12px;
+    display: inline-block;
 }
 
 .captain{
@@ -135,13 +136,16 @@ nav .fa{
 }
 
 .crew{
-    border: 1px solid #ddd;
-    height: auto;
-    width: 250px;
-
+    display: flex;
+    color: black;
 }
 
-.crew img{
+.crew-member{
+    height: auto;
+    width: 250px;
+}
+
+.crew-member img{
     height: 100%;
     width: 100%;
     object-fit: contain;
