@@ -29,7 +29,8 @@
                     </thead>
                     <tbody>
                         {% for birthday in birthdays%}
-                            <td>  </td>
+                            <td> birthday["name"] </td>
+                            <td> birthday["month"] / birthday["day"] </td>
                         {% endfor %}
                     </tbody>
                 </table>
