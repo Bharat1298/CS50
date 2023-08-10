@@ -43,7 +43,21 @@ def index():
 @login_required
 def buy():
     """Buy shares of stock"""
-    return render_template("buy.html")
+    if request.method == "POST":
+        if not request.form.get("symbol"):
+            return apology("Enter Valid Ticker")
+
+        try:
+            stock = lookup(request.form.get("symbol"))
+        except ValueError:
+            return apology("Ticker Not Valid")
+
+        print(stock)
+
+        return render_template("quote.html")
+
+    else:
+        return render_template("buy.html")
 
 
 @app.route("/history")
