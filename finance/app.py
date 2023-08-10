@@ -111,8 +111,9 @@ def quote():
 def register():
     """Register user"""
 
-    if request.method == "POST":
+    session.clear()
 
+    if request.method == "POST":
 
         if not request.form.get("username"):
             return apology("Invalid username", 403)
@@ -131,6 +132,12 @@ def register():
             db.execute("INSERT INTO users (username, hash) VALUES(?, ?)" , username, hash)
         except ValueError:
             return apology("Username is taken", 403)
+
+        id = db.execute('SELECT * FROM users WHERE username == ?', username)
+
+        session["user_id"] = id[0]["id"]
+
+        print(session["user_id"])
 
         return redirect("/login")
 
