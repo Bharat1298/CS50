@@ -127,7 +127,10 @@ def register():
 
         hash = generate_password_hash(request.form.get("password"))
 
-
+        try:
+            db.execute("INSERT INTO users (username, hash) VALUES(?, ?)" , username, hash)
+        except ValueError:
+            return apology("Username is taken", 403)
 
         return redirect("/login")
 
