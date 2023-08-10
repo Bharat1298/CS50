@@ -7,7 +7,7 @@
 {% block main %}
     <form action="/buy" method="post">
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="buy" name="stock" placeholder="Enter Ticker" type="text">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="buy" name="stock" placeholder="Enter Ticker" type="text" required>
         </div>
         <div class="mb-3">
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="amount" name="amount" placeholder="Enter Amount" type="number" min = "0">
