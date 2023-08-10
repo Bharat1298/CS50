@@ -111,15 +111,28 @@ def quote():
 def register():
     """Register user"""
 
-    if not request.form.get("username") or not request.form.get("password"):
-        return apology("must fill out all fields", 403)
+    if request.method == post:
 
-    if not request.form.get("confirmation") or request.form.get("confirmation") != request.form.get("password"):
-        return apology("must confirm password", 403)
 
-    return request.form
+        if not request.form.get("username"):
+            return apology("Invalid username", 403)
 
-    return apology("TODO")
+        if not request.form.get("password"):
+            return apology("Invalid password", 403)
+
+        if not request.form.get("confirmation") or request.form.get("confirmation") != request.form.get("password"):
+            return apology("Passwords must match", 403)
+
+        username = request.form.get("username")
+
+        hash = generate_password_hash(request.form.get("password"))
+
+
+
+        return redirect("/login")
+
+    else:
+        return render_template("register.html")
 
 
 @app.route("/sell", methods=["GET", "POST"])
