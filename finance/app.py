@@ -104,7 +104,7 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    return apology("TODO")
+    return render_template("quote.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -136,8 +136,6 @@ def register():
         id = db.execute('SELECT * FROM users WHERE username == ?', username)
 
         session["user_id"] = id[0]["id"]
-
-        print(session["user_id"])
 
         return redirect("/login")
 
