@@ -72,7 +72,7 @@ def buy():
 
         shares = int(request.form.get("shares"))
 
-        shares.round()
+        shares = int(shares)
 
         if shares < 1:
             return apology("Shares Not Valid", 400)
