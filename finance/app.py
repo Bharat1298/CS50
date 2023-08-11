@@ -96,7 +96,7 @@ def buy():
         else:
             return apology("Cannot Afford", 400)
 
-        return redirect("/")
+        redirect("index.html")
 
     else:
         return render_template("buy.html")
