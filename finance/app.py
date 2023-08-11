@@ -62,10 +62,10 @@ def buy():
         if not request.form.get("symbol"):
             return apology("Enter Valid Ticker", 400)
 
-        stock = lookup(request.form.get("symbol"))
-
-        if stock == None:
-            return apology("Ticker Not Valid", 400)
+        try:
+            stock = lookup(request.form.get("symbol"))
+        except UndefinedError:
+            return apology("Enter Valid Ticker", 400)
 
         if not request.form.get("shares"):
             return apology("Enter Valid Ticker", 400)
