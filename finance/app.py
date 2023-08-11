@@ -13,6 +13,7 @@ app = Flask(__name__)
 
 # Custom filter
 app.jinja_env.filters["usd"] = usd
+app.jinja_env.filters["lookup"] = lookup
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
@@ -40,9 +41,9 @@ def index():
 
     name = user[0]["username"]
 
-    purchases = db.execute("SELECT * FROM purchases WHERE userID == ? GROUP BY stock", session["user_id"])
+    purchases = db.execute("SELECT * FROM purchases WHERE userID == ? GROUP BY stock ORDER BY orderTotal DESC", session["user_id"])
 
-    amount = db.execute("SELECT stock, SUM(shares) AS shares FROM purchases GROUP BY stock")
+    amount = db.execute("SELECT stock, SUM(shares) AS shares FROM purchases WHERE userID == ? GROUP BY stock", session["user_id"])
 
     cash = user[0]["cash"]
 
@@ -208,4 +209,8 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+    if request.method == "POST":
+        print(hello)
+
+    else:
+        return render_template("sell.html")
