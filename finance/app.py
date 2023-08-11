@@ -62,16 +62,18 @@ def buy():
         if not request.form.get("symbol"):
             return apology("Enter Valid Ticker", 400)
 
-        try:
-            stock = lookup(request.form.get("symbol"))
-        except:
-            return apology("Enter Valid Ticker", 400)
-
         if not request.form.get("shares"):
             return apology("Enter Valid Ticker", 400)
 
         if request.form.get("shares") == None:
             return apology("Enter Valid Shares", 400)
+
+        stock = lookup(request.form.get("symbol"))
+
+        if stock == None:
+            return apology("Enter Valid Ticker", 400)
+
+        print(stock)
 
         try:
             shares = int(request.form.get("shares"))
@@ -81,9 +83,9 @@ def buy():
         if shares < 1:
             return apology("Shares Not Valid", 400)
 
-        price = stock['price']
+        # price = stock['price']
 
-        userRequest = price * shares
+        # userRequest = price * shares
 
         cash = db.execute("SELECT cash FROM users WHERE id == ?", session["user_id"])
 
