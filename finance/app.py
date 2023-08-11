@@ -49,7 +49,7 @@ def index():
 
     print(stocks)
 
-    return render_template("index.html", name = name, )
+    return render_template("index.html", name = name, stocks = stocks)
 
 
 @app.route("/buy", methods=["GET", "POST"])
