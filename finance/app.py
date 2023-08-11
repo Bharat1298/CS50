@@ -73,7 +73,9 @@ def buy():
         if request.form.get("shares") == None:
             return apology("Enter Valid Shares", 400)
 
-        shares = int(request.form.get("shares"))
+        shares = request.form.get("shares")
+
+        shares = int(shares)
 
         print(shares)
 
