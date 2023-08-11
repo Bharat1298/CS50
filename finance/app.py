@@ -60,17 +60,17 @@ def buy():
     """Buy shares of stock"""
     if request.method == "POST":
         if not request.form.get("symbol"):
-            return apology("Enter Valid Ticker", 403)
+            return apology("Enter Valid Ticker", 400)
 
         stock = lookup(request.form.get("symbol"))
 
         if stock == None:
-            return apology("Ticker Not Valid", 403)
+            return apology("Ticker Not Valid", 400)
 
         shares = int(request.form.get("shares"))
 
         if shares < 1:
-            return apology("Shares Not Valid", 403)
+            return apology("Shares Not Valid", 400)
 
         price = stock['price']
 
@@ -86,7 +86,7 @@ def buy():
             db.execute("UPDATE users SET cash = ? WHERE id == ?", balance, session["user_id"])
             db.execute("INSERT INTO purchases(userID, stock, price, shares, orderTotal, time) VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)", session["user_id"], stock["name"], price, shares, userRequest)
         else:
-            return apology("Cannot Afford", 403)
+            return apology("Cannot Afford", 400)
 
         return redirect("/")
 
@@ -114,18 +114,18 @@ def login():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            return apology("must provide username", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            return apology("must provide password", 400)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("invalid username and/or password", 403)
+            return apology("invalid username and/or password", 400)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
@@ -155,12 +155,19 @@ def quote():
     """Get stock quote."""
     if request.method == "POST":
 
-        ticker = request.form.get("symbol")
+
+        try:
+            ticker = request.form.get("symbol")
+        except ValueError:
+            return apology("Invalid stock ticker", 400)
+
+        if not ticker.isalpha():
+            return apology("Invalid stock ticker", 400)
 
         try:
             stock = lookup(ticker)
         except:
-            return apology("Invalid stock ticker", 403)
+            return apology("Invalid stock ticker", 400)
 
         name = stock['name']
 
@@ -168,7 +175,7 @@ def quote():
 
         symbol = stock['symbol']
 
-        return render_template("stock.html", name = name, price = price, symbol = symbol)
+        return render_template("quoted.html", name = name, price = price, symbol = symbol)
 
     else:
         return render_template("quote.html")
@@ -183,13 +190,13 @@ def register():
     if request.method == "POST":
 
         if not request.form.get("username"):
-            return apology("Invalid username", 403)
+            return apology("Invalid username", 400)
 
         if not request.form.get("password"):
-            return apology("Invalid password", 403)
+            return apology("Invalid password", 400)
 
         if not request.form.get("confirmation") or request.form.get("confirmation") != request.form.get("password"):
-            return apology("Passwords must match", 403)
+            return apology("Passwords must match", 400)
 
         username = request.form.get("username")
 
@@ -198,7 +205,7 @@ def register():
         try:
             db.execute("INSERT INTO users (username, hash) VALUES(?, ?)" , username, hash)
         except ValueError:
-            return apology("Username is taken", 403)
+            return apology("Username is taken", 400)
 
         id = db.execute('SELECT * FROM users WHERE username == ?', username)
 
@@ -222,7 +229,7 @@ def sell():
     if request.method == "POST":
 
         if not request.form.get("symbol"):
-            return apology("Select a stock", 403)
+            return apology("Select a stock", 400)
         else:
             symbol = request.form.get("symbol")
 
@@ -235,7 +242,7 @@ def sell():
                 count = stock["shares"]
 
         if sell > count:
-            return apology("Not enough shares", 403)
+            return apology("Not enough shares", 400)
 
         state = lookup(symbol)
 
@@ -257,7 +264,7 @@ def reset():
     if request.method == "POST":
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            return apology("must provide username", 400)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
@@ -268,23 +275,23 @@ def reset():
             usernames.append(row["username"])
 
         if request.form.get("username") not in usernames:
-            return apology("Username not found", 403)
+            return apology("Username not found", 400)
 
         # Ensure password was submitted
         elif not request.form.get("oldPassword"):
-            return apology("must provide old password", 403)
+            return apology("must provide old password", 400)
 
         # Ensure new password was submitted
         elif not request.form.get("newPassword"):
-            return apology("must provide new password", 403)
+            return apology("must provide new password", 400)
 
         # Ensure password confirmation was submitted
         elif not request.form.get("confirmPassword") or request.form.get("confirmPassword") != request.form.get("newPassword"):
-            return apology("New Passwords must match", 403)
+            return apology("New Passwords must match", 400)
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("oldPassword")):
-            return apology("Incorrect Password", 403)
+            return apology("Incorrect Password", 400)
 
         newPassword = generate_password_hash(request.form.get("newPassword"))
 

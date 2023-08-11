@@ -12,6 +12,3 @@
         <button class="btn btn-primary" type="submit">Quote</button>
     </form>
 {% endblock %}
-
-
-CREATE TABLE purchases (userID int NOT NULL, stock TEXT NOT NULL, price NUMERIC NOT NULL, shares INT NOT NULL, orderTotal NUMERIC NOT NULL, time DATETIME NOT NULL, FOREIGN KEY (userID) REFERENCES users(id));
