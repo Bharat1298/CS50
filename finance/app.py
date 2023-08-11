@@ -45,14 +45,17 @@ def buy():
     """Buy shares of stock"""
     if request.method == "POST":
         if not request.form.get("symbol"):
-            return apology("Enter Valid Ticker")
+            return apology("Enter Valid Ticker", 403)
 
-        try:
-            stock = lookup(request.form.get("symbol"))
-        except ValueError:
-            return apology("Ticker Not Valid")
+        stock = lookup(request.form.get("symbol"))
 
-        print(stock)
+        if stock == None:
+            return apology("Ticker Not Valid", 403)
+
+        shares = lookup(request.form.get("shares"))
+
+        if shares < 1:
+            return apology("Shares Not Valid", 403)
 
         return render_template("quote.html")
 
