@@ -59,19 +59,17 @@ def index():
 def buy():
     """Buy shares of stock"""
     if request.method == "POST":
-        if not request.form.get("symbol"):
-            return apology("Enter Valid Ticker", 400)
-
-        if not request.form.get("shares"):
-            return apology("Enter Valid Ticker", 400)
-
-        if request.form.get("shares") == None:
-            return apology("Enter Valid Shares", 400)
 
         stock = lookup(request.form.get("symbol"))
 
         if stock == None:
             return apology("Enter Valid Ticker", 400)
+
+        if not request.form.get("symbol"):
+            return apology("Enter Valid Ticker", 400)
+
+        if request.form.get("shares") == None:
+            return apology("Enter Valid Shares", 400)
 
         try:
             shares = int(request.form.get("shares"))
