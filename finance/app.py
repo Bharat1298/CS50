@@ -70,6 +70,7 @@ def buy():
             balance -= userRequest
             db.execute("UPDATE users SET cash = ? WHERE id == ?", balance, session["user_id"])
             db.execute("INSERT INTO purchases(userID, stock, price, time) VALUES(?, ?, ?, CURRENT_TIMESTAMP)", session["user_id"], stock["name"], price)
+            #CREATE TABLE portfolio (userID int NOT NULL, stock TEXT NOT NULL, shares int NOT NULL, FOREIGN KEY (userID) REFERENCES users(id));
         else:
             return apology("Cannot Afford", 403)
 
