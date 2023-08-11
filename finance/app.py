@@ -40,7 +40,12 @@ def index():
 
     name = names[0]["username"]
 
-    stocks = db.execute("SELECT stock FROM purchases WHERE userID == ?", session["user_id"])
+    pStocks = db.execute("SELECT stock FROM purchases WHERE userID == ?", session["user_id"])
+
+    stocks = []
+
+    for stock in pStocks:
+        stocks.append(stock["stock"])
 
     print(stocks)
 
