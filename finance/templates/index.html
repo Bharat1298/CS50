@@ -21,12 +21,12 @@
     </thead>
    <tbody>
 
-    {%for stock in stocks%}
+    {% for stock in stocks %}
     <tr>
         stock
     </tr>
 
-    {%endfor%}
+    {% endfor %}
 
             <!-- <tr>
                 <td class="text-start">SCHD</td>
@@ -37,7 +37,7 @@
             </tr> -->
 
     </tbody>
-    <tfoot>
+    <!-- <tfoot>
         <tr>
             <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
             <td class="border-0 text-end">${{cash}}</td>
@@ -46,6 +46,6 @@
             <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
             <td class="border-0 w-bold text-end">${{total}}</td>
         </tr>
-    </tfoot>
+    </tfoot> -->
 </table>
 {% endblock %}
