@@ -65,11 +65,12 @@ def buy():
 
         print(cash)
 
-        balance = int(cash["cash"])
+        balance = int(cash[0]["cash"])
 
         if balance > userRequest:
             #buy shares
             balance -= userRequest
+            db.execute("INSERT INTO )
 
         return render_template("quote.html")
 
