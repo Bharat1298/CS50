@@ -64,7 +64,7 @@ def buy():
 
         try:
             stock = lookup(request.form.get("symbol"))
-        except UndefinedError:
+        except:
             return apology("Enter Valid Ticker", 400)
 
         if not request.form.get("shares"):
