@@ -36,7 +36,11 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    return apology("TODO")
+    names = db.execute("SELECT username FROM users WHERE id == ?", session["user_id"])
+
+    name = names[0]["username"]
+
+    return render_template("index.html", name = name, )
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -73,7 +77,7 @@ def buy():
         else:
             return apology("Cannot Afford", 403)
 
-        return render_template("quote.html")
+        return render_template("index.html")
 
     else:
         return render_template("buy.html")
