@@ -52,7 +52,7 @@ def buy():
         if stock == None:
             return apology("Ticker Not Valid", 403)
 
-        shares = lookup(request.form.get("shares"))
+        shares = int(request.form.get("shares"))
 
         print(shares)
 
