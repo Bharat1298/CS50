@@ -69,7 +69,7 @@ def buy():
             #buy shares
             balance -= userRequest
             db.execute("UPDATE users SET cash = ? WHERE id == ?", balance, session["user_id"])
-            db.execute("INSERT INTO purchases(userID, stock, price, time) VALUES(?, ?, ?, ?)", session["user_id"], stock["name"], price, )
+            db.execute("INSERT INTO purchases(userID, stock, price, time) VALUES(?, ?, ?, CURRENT_TIMESTAMP)", session["user_id"], stock["name"], price)
         else:
             return apology("Cannot Afford", 403)
 
