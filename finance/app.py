@@ -61,7 +61,11 @@ def buy():
 
         userRequest = price * shares
 
-        balance = db.execute("SELECT cash FROM users WHERE id == ?" , session["user_id"])
+        cash = db.execute("SELECT cash FROM users WHERE id == ?" , session["user_id"])
+
+        print(cash)
+
+        balance = int(cash["cash"])
 
         if balance > userRequest:
             #buy shares
