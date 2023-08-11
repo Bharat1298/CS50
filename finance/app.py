@@ -73,8 +73,6 @@ def buy():
         if stock == None:
             return apology("Enter Valid Ticker", 400)
 
-        print(stock)
-
         try:
             shares = int(request.form.get("shares"))
         except ValueError:
@@ -83,16 +81,15 @@ def buy():
         if shares < 1:
             return apology("Shares Not Valid", 400)
 
-        # price = stock['price']
+        price = stock['price']
 
-        # userRequest = price * shares
+        userRequest = price * shares
 
         cash = db.execute("SELECT cash FROM users WHERE id == ?", session["user_id"])
 
         balance = int(cash[0]["cash"])
 
         if balance > userRequest:
-            #buy shares
             balance -= userRequest
             db.execute("UPDATE users SET cash = ? WHERE id == ?", balance, session["user_id"])
             db.execute("INSERT INTO purchases(userID, stock, price, shares, orderTotal, time) VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)", session["user_id"], stock["name"], price, shares, userRequest)
