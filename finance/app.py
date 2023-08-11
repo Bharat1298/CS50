@@ -61,16 +61,16 @@ def buy():
 
         userRequest = price * shares
 
-        cash = db.execute("SELECT cash FROM users WHERE id == ?" , session["user_id"])
-
-        print(cash)
+        cash = db.execute("SELECT cash FROM users WHERE id == ?", session["user_id"])
 
         balance = int(cash[0]["cash"])
 
         if balance > userRequest:
             #buy shares
             balance -= userRequest
-            db.execute("INSERT INTO )
+            db.execute("UPDATE users SET cash = ? WHERE id == ?", balance, session["user_id"])
+        else:
+            return apology("Cannot Afford", 403)
 
         return render_template("quote.html")
 
