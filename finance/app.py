@@ -59,13 +59,13 @@ def buy():
 
         price = stock['price']
 
-        request = price * shares
+        userRequest = price * shares
 
         balance = db.execute("SELECT cash FROM users WHERE id == ?" , session["user_id"])
 
-        if balance > request:
+        if balance > userRequest:
             #buy shares
-            balance -= request
+            balance -= userRequest
 
         return render_template("quote.html")
 
