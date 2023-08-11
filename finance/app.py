@@ -43,7 +43,11 @@ def index():
 
     purchases = db.execute("SELECT * FROM purchases WHERE userID == ? GROUP BY stock ORDER BY orderTotal DESC", session["user_id"])
 
-    amount = db.execute("SELECT stock, SUM(shares) AS shares FROM purchases WHERE userID == ? GROUP BY stock", session["user_id"])
+    amount = db.execute("SELECT stock, shares FROM (SELECT stock, SUM(shares) AS shares FROM purchases WHERE userID == ? GROUP BY stock) WHERE shares > 0", session["user_id"])
+
+    for stock in amount:
+        if int(stock["shares"]) < 0:
+            amount.remove(stock)
 
     cash = user[0]["cash"]
 
@@ -93,8 +97,9 @@ def buy():
 @app.route("/history")
 @login_required
 def history():
-    """Show history of transactions"""
-    return apology("TODO")
+    history = db.execute("SELECT * FROM purchases WHERE userID = ?", session["user_id"])
+    print(history)
+    return render_template("history.html", history = history)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -209,8 +214,82 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    if request.method == "POST":
-        print(hello)
+    portfolio = db.execute("SELECT stock, shares FROM (SELECT stock, SUM(shares) AS shares FROM purchases WHERE userID == ? GROUP BY stock) WHERE shares > 0", session["user_id"])
+    listOfStocks = []
+    for purchase in portfolio:
+        listOfStocks.append(purchase["stock"])
 
+    if request.method == "POST":
+
+        if not request.form.get("symbol"):
+            return apology("Select a stock", 403)
+        else:
+            symbol = request.form.get("symbol")
+
+        count = 0
+
+        sell = int(request.form.get("shares"))
+
+        for stock in portfolio:
+            if(symbol in stock["stock"]):
+                count = stock["shares"]
+
+        if sell > count:
+            return apology("Not enough shares", 403)
+
+        state = lookup(symbol)
+
+        print(state)
+
+        price = state["price"]
+
+        print(price)
+
+        db.execute("UPDATE users SET cash = cash + ? WHERE id == ?", price * sell, session["user_id"])
+        db.execute("INSERT INTO purchases(userID, stock, price, shares, orderTotal, time) VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)", session["user_id"], state["name"], price, sell * -1, price * sell)
+
+        return redirect("/")
     else:
-        return render_template("sell.html")
+        return render_template("sell.html", listOfStocks = listOfStocks)
+
+@app.route("/reset", methods=["GET", "POST"])
+def reset():
+    if request.method == "POST":
+        # Ensure username was submitted
+        if not request.form.get("username"):
+            return apology("must provide username", 403)
+
+        # Query database for username
+        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+
+        usernames = []
+
+        for row in rows:
+            usernames.append(row["username"])
+
+        if request.form.get("username") not in usernames:
+            return apology("Username not found", 403)
+
+        # Ensure password was submitted
+        elif not request.form.get("oldPassword"):
+            return apology("must provide old password", 403)
+
+        # Ensure new password was submitted
+        elif not request.form.get("newPassword"):
+            return apology("must provide new password", 403)
+
+        # Ensure password confirmation was submitted
+        elif not request.form.get("confirmPassword") or request.form.get("confirmPassword") != request.form.get("newPassword"):
+            return apology("New Passwords must match", 403)
+
+        # Ensure username exists and password is correct
+        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("oldPassword")):
+            return apology("Incorrect Password", 403)
+
+        newPassword = generate_password_hash(request.form.get("newPassword"))
+
+        db.execute("UPDATE users SET hash = ? WHERE username == ?", newPassword, request.form.get("username"))
+
+        return redirect("/")
+    else:
+        return render_template("reset.html")
