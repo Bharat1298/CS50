@@ -54,10 +54,18 @@ def buy():
 
         shares = int(request.form.get("shares"))
 
-        print(shares)
-
         if shares < 1:
             return apology("Shares Not Valid", 403)
+
+        price = stock['price']
+
+        request = price * shares
+
+        balance = db.execute("SELECT cash FROM users WHERE id == ?" , session["user_id"])
+
+        if balance > request:
+            #buy shares
+            balance -= request
 
         return render_template("quote.html")
 
