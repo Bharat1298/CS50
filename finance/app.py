@@ -155,24 +155,21 @@ def quote():
     """Get stock quote."""
     if request.method == "POST":
 
-        try:
-            ticker = request.form.get("symbol")
-        except ValueError:
-            return apology("Invalid stock ticker", 400)
+        ticker = request.form.get("symbol")
 
         if not ticker.isalpha():
             return apology("Invalid stock ticker", 400)
 
-        try:
-            stock = lookup(ticker)
-        except:
-            return apology("Invalid stock ticker", 400)
+        stock = lookup(ticker)
 
-        name = stock['name']
+        if stock == None:
+            return apology("Invalid ticker", 400)
 
-        price = stock['price']
+        name = stock["name"]
 
-        symbol = stock['symbol']
+        price = stock["price"]
+
+        symbol = stock["symbol"]
 
         return render_template("quoted.html", name = name, price = price, symbol = symbol)
 
