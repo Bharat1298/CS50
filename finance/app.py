@@ -36,20 +36,17 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    names = db.execute("SELECT username FROM users WHERE id == ?", session["user_id"])
+    user = db.execute("SELECT * FROM users WHERE id == ?", session["user_id"])
 
-    name = names[0]["username"]
+    name = user[0]["username"]
 
-    pStocks = db.execute("SELECT stock FROM purchases WHERE userID == ?", session["user_id"])
+    purchases = db.execute("SELECT * FROM purchases WHERE userID == ? GROUP BY stock", session["user_id"])
 
-    stocks = []
+    amount = db.execute("SELECT stock, SUM(shares) AS shares FROM purchases GROUP BY stock")
 
-    for stock in pStocks:
-        stocks.append(stock["stock"])
+    cash = user[0]["cash"]
 
-    print(stocks)
-
-    return render_template("index.html", name = name, stocks = stocks)
+    return render_template("index.html", name = name, purchases = purchases, amount = amount, cash = cash)
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -86,7 +83,7 @@ def buy():
         else:
             return apology("Cannot Afford", 403)
 
-        return render_template("index.html")
+        return redirect("/")
 
     else:
         return render_template("buy.html")

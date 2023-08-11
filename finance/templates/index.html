@@ -21,34 +21,44 @@
     </thead>
    <tbody>
 
-    {% for stock in stocks %}
+    {% set order = namespace(total = 0) %}
 
-        <tr>
-            {{stock}}
-        </tr>
-        
+    {% for purchase in purchases %}
 
+        {% set stockAmount = namespace(count = 0) %}
+
+        {% for shares in amount %}
+
+            {% if shares["stock"] == purchase["stock"] %}
+
+                {% set stockAmount.count = shares["shares"] %}
+
+            {% endif %}
+
+        {% endfor %}
+
+        {% set order.total += purchase["price"] * stockAmount.count %}
+
+            <tr>
+                <td class="text-start">{{purchase["stock"]}}</td>
+                <td class="text-start">{{purchase["stock"]}}</td>
+                <td class="text-end">{{stockAmount.count}}</td>
+                <td class="text-end">${{purchase["price"]}}</td>
+                <td class="text-end">${{purchase["price"] * stockAmount.count}}</td>
+            </tr>
 
     {% endfor %}
 
-            <!-- <tr>
-                <td class="text-start">SCHD</td>
-                <td class="text-start">SCHD</td>
-                <td class="text-end">20</td>
-                <td class="text-end">$74.36</td>
-                <td class="text-end">$1,487.20</td>
-            </tr> -->
-
     </tbody>
-    <!-- <tfoot>
+    <tfoot>
         <tr>
             <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
             <td class="border-0 text-end">${{cash}}</td>
         </tr>
         <tr>
             <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
-            <td class="border-0 w-bold text-end">${{total}}</td>
+            <td class="border-0 w-bold text-end">${{order.total}}</td>
         </tr>
-    </tfoot> -->
+    </tfoot>
 </table>
 {% endblock %}
