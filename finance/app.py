@@ -67,8 +67,6 @@ def buy():
         if stock == None:
             return apology("Enter Valid Ticker", 400)
 
-        print(stock)
-
         if not request.form.get("symbol"):
             return apology("Enter Valid Ticker", 400)
 
