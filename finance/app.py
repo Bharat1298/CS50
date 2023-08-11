@@ -54,6 +54,8 @@ def buy():
 
         shares = lookup(request.form.get("shares"))
 
+        print(shares)
+
         if shares < 1:
             return apology("Shares Not Valid", 403)
 
