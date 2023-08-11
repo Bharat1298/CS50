@@ -67,7 +67,12 @@ def buy():
         if stock == None:
             return apology("Ticker Not Valid", 400)
 
+        if not request.form.get("shares"):
+            return apology("Enter Valid Ticker", 400)
+
         shares = int(request.form.get("shares"))
+
+        shares.round()
 
         if shares < 1:
             return apology("Shares Not Valid", 400)
