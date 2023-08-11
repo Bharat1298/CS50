@@ -155,7 +155,6 @@ def quote():
     """Get stock quote."""
     if request.method == "POST":
 
-
         try:
             ticker = request.form.get("symbol")
         except ValueError:
