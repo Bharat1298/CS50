@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 # Custom filter
 app.jinja_env.filters["usd"] = usd
-app.jinja_env.filters["lookup"] = lookup
+app.jinja_env.filters["look"] = lookup
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False

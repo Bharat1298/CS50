@@ -37,14 +37,14 @@
 
         {% endfor %}
 
-        {% set order.total = order.total + ((purchase["stock"] | lookup)['price'] * stockAmount.count) %}
+        {% set order.total = order.total + ((purchase["stock"] | look)['price'] * stockAmount.count) %}
 
             <tr>
                 <td class="text-start">{{purchase["stock"]}}</td>
                 <td class="text-start">{{purchase["stock"]}}</td>
                 <td class="text-end">{{stockAmount.count}}</td>
-                <td class="text-end">{{((purchase["stock"] | lookup)['price']) | usd}}</td>
-                <td class="text-end">{{(((purchase["stock"] | lookup)['price']) * stockAmount.count) | usd}}</td>
+                <td class="text-end">{{((purchase["stock"] | look)['price']) | usd}}</td>
+                <td class="text-end">{{(((purchase["stock"] | look)['price']) * stockAmount.count) | usd}}</td>
             </tr>
 
     {% endfor %}
