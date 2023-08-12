@@ -83,8 +83,7 @@ def buy():
 
         try:
             price = stock['price']
-        except:
-            return apology("Stock Not Valid", 400)
+        
 
         userRequest = price * shares
 
@@ -96,6 +95,7 @@ def buy():
             balance -= userRequest
             db.execute("UPDATE users SET cash = ? WHERE id == ?", balance, session["user_id"])
             db.execute("INSERT INTO purchases(userID, stock, price, shares, orderTotal, time) VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)", session["user_id"], stock["name"], price, shares, userRequest)
+            flash(f'Successfully bought {shares} shares of {stock["name"]} for {usd(userRequest)}')
         else:
             return apology("Cannot Afford", 400)
 
