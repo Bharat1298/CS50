@@ -81,7 +81,10 @@ def buy():
         if shares < 1:
             return apology("Shares Not Valid", 400)
 
-        price = stock['price']
+        try:
+            price = stock['price']
+        except:
+            return apology("Stock Not Valid", 400)
 
         userRequest = price * shares
 
